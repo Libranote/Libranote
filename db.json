@@ -1,0 +1,198 @@
+{
+  "students": [
+    {
+      "id": 0,
+      "name": "Bob",
+      "firstname": "Bobby",
+      "class": 0,
+      "birthday": "2002-04-07",
+      "group": 1,
+      "options": [ 0 ]
+    }
+  ],
+  "classes": [
+    {
+      "id": 0,
+      "name": "Seconde A",
+      "teachers": [ 0, 1 ],
+      "timetable": [
+        {
+          "day": "Monday",
+          "courses": [
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 2,
+              "teacher": 0,
+              "room": "Salle 108",
+              "hour": [ "8:50", "9:45" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "10:05", "12:00" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "13:50", "14:45" ]
+            }
+          ]
+        },
+        {
+          "day": "Tuesday",
+          "courses": [
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 2,
+              "teacher": 0,
+              "room": "Salle 108",
+              "hour": [ "8:50", "9:45" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "10:05", "12:00" ]
+            }
+          ]
+        },
+        {
+          "day": "Wednesday",
+          "courses": [
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 2,
+              "teacher": 0,
+              "room": "Salle 108",
+              "hour": [ "8:50", "9:45" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "10:05", "12:00" ]
+            }
+          ]
+        },
+        {
+          "day": "Thursday",
+          "courses": [
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 2,
+              "teacher": 0,
+              "room": "Salle 108",
+              "hour": [ "8:50", "9:45" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "10:05", "12:00" ]
+            }
+          ]
+        },
+        {
+          "day": "Friday",
+          "courses": [
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 2,
+              "teacher": 0,
+              "room": "Salle 108",
+              "hour": [ "8:50", "9:45" ]
+            },
+            {
+              "subject": 1,
+              "teacher": 1,
+              "room": "Salle 19",
+              "hour": [ "10:05", "12:00" ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "id": 0,
+      "name": "Anglais",
+      "optional": false,
+      "color": "#197ceb"
+    },
+    {
+      "id": 1,
+      "name": "Anglais Euro",
+      "optional": true,
+      "color": "#36b91b"
+    },
+    {
+      "id": 2,
+      "name": "Mathématiques",
+      "optional": false,
+      "color": "#ebcf19"
+    }
+  ],
+  "teachers": [
+    {
+      "id": 0,
+      "name": "Dupont",
+      "gender": "M.",
+      "subjects": [ 2 ]
+    },
+    {
+      "id": 1,
+      "name": "Dupré",
+      "gender": "Mme.",
+      "subjects": [ 0, 1 ]
+    }
+  ],
+  "homeworks": [
+    {
+      "id": 0,
+      "date": "2017-09-06 08:50",
+      "guideline": "Exercices n°1 et 2 page 28",
+      "coefficient": 0,
+      "onlyFor": []
+    }
+  ],
+  "tests": [
+    {
+      "id": 0,
+      "title": "Flash test n°1",
+      "mark": 7.5,
+      "outOf": 10,
+      "comment": "Good work",
+      "students": [ 0 ],
+      "date": "2017-09-07 10:05"
+    }
+  ],
+  "connected": { "type": "student", "id": 0 }
+}

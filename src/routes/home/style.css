@@ -1,0 +1,12 @@
+.home {
+	padding: 50px 150px;
+	min-height: 100%;
+	width: 100%;
+}
+
+.background {
+	padding: auto;
+	color: lightgray;
+	min-height: 100%;
+	width: 100%;
+}
