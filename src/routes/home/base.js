@@ -12,10 +12,10 @@ export default class BaseHome extends Component {
   }
 
   render (_, state) {
-    return state.ready ? this.renderHome(state) : <h1 class={style.background}>Loading…</h1>
+    return state.ready ? this.renderHome() : <h1 class={style.background}>Loading…</h1>
   }
 
-  renderHome ({ student, teachers, subjects, tests, hiddenComponents }) {
+  renderHome () {
     return <div class={style.home}>
       <h1>{this.state.heading}</h1>
       {this.sections.map(section =>
@@ -34,7 +34,7 @@ export default class BaseHome extends Component {
   }
 
   toggleButton (expander) {
-    return <button class={style.toggleButton} onClick={this.toggle.bind(this, [ expander ])}>
+    return <button class={style.coloredButton} onClick={this.toggle.bind(this, [ expander ])}>
       Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'more' : 'less'}
     </button>
   }

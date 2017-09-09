@@ -2,7 +2,7 @@ import { Component } from 'preact'
 import { Router } from 'preact-router'
 
 import Header from './header'
-import Home from '../routes/home/student'
+import { getHomePage } from '../routes/home/utils'
 import Profile from '../routes/profile'
 
 export default class App extends Component {
@@ -16,10 +16,13 @@ export default class App extends Component {
 
   render () {
     document.title = 'Libranote'
+    console.log(getHomePage)
+    const homepage = getHomePage('teacher', 0)
+    console.log(homepage)
     return <div id="app">
       <Header />
       <Router onChange={this.handleRoute.bind(this)}>
-        <Home path="/" studentId={0} />
+        {homepage}
         <Profile path="/profile/" user="me" />
         <Profile path="/profile/:user" />
       </Router>

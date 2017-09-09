@@ -2,10 +2,9 @@ import { Component } from 'preact'
 import style from './style'
 
 export default class Timetable extends Component {
-  render ({ student, teachers, subjects }) {
-    const cls = this.props.class
+  render ({ schedule, showTeacher }) {
     return <div class={style.timetable}>
-      {cls.timetable.map(day =>
+      {schedule.map(day =>
         <div class={style.day}>
           <h3>{day.day}</h3>
           {this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' }).map(c => {
@@ -19,13 +18,11 @@ export default class Timetable extends Component {
                 return null
               }
             } else {
-              const teacher = teachers.find(t => t.id === c.teacher)
-              const subject = subjects.find(s => s.id === c.subject)
-              return <div class={style.course} style={{ backgroundColor: subject.color, height: height }}>
+              return <div class={style.course} style={{ backgroundColor: c.subject.color, height: height }}>
                 <p>
-                  {subject.name}
+                  {c.subject.name}
                   <br />
-                  {teacher.gender} {teacher.name}
+                  {showTeacher ? `${c.teacher.gender} ${c.teacher.name}` : c.class.name}
                 </p>
                 <p>
                   {c.room}

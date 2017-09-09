@@ -14,3 +14,7 @@ export async function fetchAll (urls) {
   const toJson = results.map(res => res.json())
   return Promise.all(toJson)
 }
+
+export function flatten (arrays) {
+  return arrays.reduce((sum, elt, i) => i > 0 ? sum.concat(elt) : sum, arrays[0])
+}
