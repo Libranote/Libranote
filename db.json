@@ -49,15 +49,15 @@
           "day": "Tuesday",
           "courses": [
             {
-              "subject": 0,
-              "teacher": 1,
-              "room": "Salle 17",
-              "hour": [ "7:50", "8:45" ]
-            },
-            {
               "subject": 2,
               "teacher": 0,
               "room": "Salle 108",
+              "hour": [ "7:50", "8:45" ]
+            },
+            {
+              "subject": 0,
+              "teacher": 1,
+              "room": "Salle 17",
               "hour": [ "8:50", "9:45" ]
             },
             {
@@ -189,9 +189,22 @@
       "title": "Flash test n°1",
       "mark": 7.5,
       "outOf": 10,
+      "coefficient": 1,
       "comment": "Good work",
       "students": [ 0 ],
-      "date": "2017-09-07 10:05"
+      "date": "2017-09-07 10:05",
+      "subject": 0
+    },
+    {
+      "id": 1,
+      "title": "Contrôle sur les statistiques",
+      "mark": 13.75,
+      "outOf": 20,
+      "coefficient": 2,
+      "comment": "Fais attention aux erreurs d'inattention",
+      "students": [ 0 ],
+      "date": "2017-09-07 8:50",
+      "subject": 2
     }
   ],
   "connected": { "type": "student", "id": 0 }

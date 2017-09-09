@@ -10,10 +10,10 @@ export default class Timetable extends Component {
           <h3>{day.day}</h3>
           {this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' }).map(c => {
             const duration = this.getDuration(c)
-            const height = `${duration / 5}em`
+            const height = `${duration / 7.5}em`
 
             if (c.blank) {
-              if (duration > 5) {
+              if (duration > 20) {
                 return <div class={style.course} style={{ height: height }}></div>
               } else {
                 return null
@@ -24,14 +24,12 @@ export default class Timetable extends Component {
               return <div class={style.course} style={{ backgroundColor: subject.color, height: height }}>
                 <p>
                   {subject.name}
-                </p>
-                <p>
+                  <br />
                   {teacher.gender} {teacher.name}
                 </p>
                 <p>
                   {c.room}
-                </p>
-                <p>
+                  <br />
                   {c.hour[0]} — {c.hour[1]}
                 </p>
               </div>
