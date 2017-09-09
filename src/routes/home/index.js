@@ -2,11 +2,10 @@ import { Component } from 'preact'
 import style from './style'
 import { apiUrl } from '../../utils'
 import Timetable from '../../components/timetable'
+import Expander from '../../components/expander'
 
 export default class Home extends Component {
-  state = {
-    hiddenComponents: {}
-  }
+  expanders = {}
 
   async componentWillMount () {
     const results = await Promise.all([
@@ -28,7 +27,6 @@ export default class Home extends Component {
   }
 
   renderHome ({ student, teachers, subjects, tests, hiddenComponents }) {
-    console.log(subjects)
     return <div class={style.home}>
       <h1>Welcome, {student.firstname} {student.name}</h1>
       <div>
@@ -36,16 +34,17 @@ export default class Home extends Component {
           This week
           {this.toggleButton('week')}
         </h2>
-        {hiddenComponents['week'] ? null : <Timetable student={student} class={this.state.class} teachers={teachers} subjects={subjects}/>}
+        <Expander ref={this.expander('week')}>
+          <Timetable student={student} class={this.state.class} teachers={teachers} subjects={subjects}/>
+        </Expander>
       </div>
       <div>
         <h2>
           Last marks
           {this.toggleButton('marks')}
         </h2>
-        {hiddenComponents['marks']
-          ? null
-          : <table class={style.marks}>
+        <Expander ref={this.expander('mark')}>
+          <table class={style.marks}>
             <thead>
               <td>Subject</td>
               <td>Mark</td>
@@ -63,21 +62,24 @@ export default class Home extends Component {
               )}
             </tbody>
           </table>
-        }
+        </Expander>
       </div>
     </div>
   }
 
-  toggleButton (forWhat) {
-    return <button class={style.toggleButton} onClick={this.toggle.bind(this, [ forWhat ])}>Show {this.state.hiddenComponents[forWhat] ? 'more' : 'less'}</button>
+  expander (what) {
+    return (e) => { this.expanders[what] = e }
+  }
+
+  toggleButton (expander) {
+    return <button class={style.toggleButton} onClick={this.toggle.bind(this, [ expander ])}>
+      Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'more' : 'less'}
+    </button>
   }
 
   toggle (what) {
-    const hidden = this.state.hiddenComponents
-    if (hidden[what] == null) {
-      hidden[what] = false
+    if (this.expanders[what]) {
+      this.expanders[what].toggle()
     }
-    hidden[what] = !hidden[what]
-    this.setState({ hiddenComponents: hidden })
   }
 }

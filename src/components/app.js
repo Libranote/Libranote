@@ -16,15 +16,13 @@ export default class App extends Component {
 
   render () {
     document.title = 'Libranote'
-    return (
-      <div id="app">
-        <Header />
-        <Router onChange={this.handleRoute.bind(this)}>
-          <Home path="/" studentId={0} />
-          <Profile path="/profile/" user="me" />
-          <Profile path="/profile/:user" />
-        </Router>
-      </div>
-    )
+    return <div id="app">
+      <Header />
+      <Router onChange={this.handleRoute.bind(this)}>
+        <Home path="/" studentId={0} />
+        <Profile path="/profile/" user="me" />
+        <Profile path="/profile/:user" />
+      </Router>
+    </div>
   }
 }
