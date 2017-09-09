@@ -8,3 +8,9 @@ export function apiUrl (table, query) {
   }
   return url.href
 }
+
+export async function fetchAll (urls) {
+  const results = await Promise.all(urls.map(u => fetch(u)))
+  const toJson = results.map(res => res.json())
+  return Promise.all(toJson)
+}

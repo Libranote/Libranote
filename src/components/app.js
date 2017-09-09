@@ -2,7 +2,7 @@ import { Component } from 'preact'
 import { Router } from 'preact-router'
 
 import Header from './header'
-import Home from '../routes/home'
+import Home from '../routes/home/student'
 import Profile from '../routes/profile'
 
 export default class App extends Component {
