@@ -1,5 +1,5 @@
 import { Component } from 'preact'
-import { Router } from 'preact-router'
+import { Router, route } from 'preact-router'
 
 import { fetchDataFor } from '../utils.js'
 import Header from './header'
@@ -7,32 +7,49 @@ import { getHomePage } from '../routes/home/utils'
 import Test from '../routes/tests'
 import store from '../store'
 import style from './global-style'
+import LoginForm from '../routes/login/form'
+import Redirect from './redirect'
 
 export default class App extends Component {
-  user = { type: 'student', id: 0 }
-
-  async componentWillMount () {
-    store.set(await fetchDataFor(this.user.type, this.user.id))
-    store.readyFor(this.user.type, this.user.id)
+  componentWillMount () {
+    document.title = 'Libranote'
   }
 
-  /** Gets fired when the route changes.
-  * @param {Object} event "change" event from [preact-router](http://git.io/preact-router)
-  * @param {string} event.url The newly routed URL
-  */
   handleRoute (e) {
     this.currentUrl = e.url
+    if (!this.user && this.currentUrl !== '/login') {
+      route('/login')
+    } else if (this.user && this.currentUrl === '/logout') {
+      this.user = null
+      this.loginMessage = <p>Succesfully logged out</p>
+      console.log(this.loginMessage, this)
+      route('/login')
+    }
+  }
+
+  loggedIn (user) {
+    this.user = user
+    fetchDataFor(this.user.type, this.user.id).then(res => {
+      store.set(res)
+      store.readyFor(this.user.type, this.user.id)
+      this.forceUpdate()
+      route('/') // show the correct homepage
+    })
   }
 
   render () {
-    document.title = 'Libranote'
-    const homepage = getHomePage(this.user.type, this.user.id)
-    return <div id="app" class={style.app}>
-      <Header />
+    const homepage = this.user ? getHomePage(this.user.type, this.user.id) : null
+    const res = <div id="app" class={style.app}>
+      <Header loggedInAs={this.user ? this.user.type : 'logged-out'} />
       <Router onChange={this.handleRoute.bind(this)}>
-        {homepage}
+        <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
+          {this.loginMessage}
+        </LoginForm>
+        {homepage || <Redirect path='/' to='/login' />}
         <Test path='tests/:id' />
       </Router>
     </div>
+    this.loginMessage = null
+    return res
   }
 }

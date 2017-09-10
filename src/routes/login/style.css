@@ -1,0 +1,13 @@
+.form > * {
+  display: block;
+  margin: 20px 0px;
+  width: 20%;
+}
+
+.form label {
+  margin-bottom: 0px;
+}
+
+.form input, .form select {
+  margin-top: 10px;
+}
