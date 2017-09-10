@@ -1,0 +1,26 @@
+.app main {
+  padding: 100px 250px;
+	padding-bottom: 300px;
+	min-height: 100%;
+	width: 100%;
+	font-family: 'Open Sans';
+}
+
+.marks {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.marks thead {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.marks td {
+	padding: 10px;
+}
+
+.marks tr:nth-child(2n) {
+	background: rgba(0, 0, 0, 0.05);
+}

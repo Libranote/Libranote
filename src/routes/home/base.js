@@ -16,7 +16,7 @@ export default class BaseHome extends Component {
   }
 
   renderHome () {
-    return <div class={style.home}>
+    return <main>
       <h1>{this.state.heading}</h1>
       {this.sections.map(section =>
         <div>
@@ -26,7 +26,7 @@ export default class BaseHome extends Component {
           </Expander>
         </div>
       )}
-    </div>
+    </main>
   }
 
   expander (what) {
@@ -35,13 +35,14 @@ export default class BaseHome extends Component {
 
   toggleButton (expander) {
     return <button class={style.coloredButton} onClick={this.toggle.bind(this, [ expander ])}>
-      Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'more' : 'less'}
+      Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'less' : 'more'}
     </button>
   }
 
   toggle (what) {
     if (this.expanders[what]) {
       this.expanders[what].toggle()
+      this.forceUpdate()
     }
   }
 }

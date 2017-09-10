@@ -12,11 +12,7 @@ export default class Timetable extends Component {
             const height = `${duration / 7.5}em`
 
             if (c.blank) {
-              if (duration > 20) {
-                return <div class={style.course} style={{ height: height }}></div>
-              } else {
-                return null
-              }
+              return <div class={style.course} style={{ height: height }}></div>
             } else {
               return <div class={style.course} style={{ backgroundColor: c.subject.color, height: height }}>
                 <p>
