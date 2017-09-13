@@ -1,6 +1,7 @@
 import { Component } from 'preact'
 import style from './style'
 import Expander from '../../components/expander'
+import globalStyle from '../../components/global-style'
 
 export default class BaseHome extends Component {
   expanders = {}
@@ -34,7 +35,7 @@ export default class BaseHome extends Component {
   }
 
   toggleButton (expander) {
-    return <button class={style.coloredButton} onClick={this.toggle.bind(this, [ expander ])}>
+    return <button class={globalStyle.coloredButton} onClick={this.toggle.bind(this, [ expander ])}>
       Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'less' : 'more'}
     </button>
   }

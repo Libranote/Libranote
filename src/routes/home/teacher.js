@@ -1,16 +1,9 @@
-import { Link } from 'preact-router'
 import BaseHome from './base'
-import style from './style'
-import { apiUrl } from '../../utils'
 import Timetable from '../../components/timetable'
+import TestList from '../tests/list'
 import store from '../../store'
-import globalStyle from '../../components/global-style'
 
 export default class TeacherHome extends BaseHome {
-  state = {
-    marksCache: []
-  }
-
   componentWillMount () {
     store.onReadyFor('teacher', this.props.teacherId, this.init.bind(this))
   }
@@ -23,6 +16,8 @@ export default class TeacherHome extends BaseHome {
       tests: t => t.teacherId === this.props.teacherId,
       classes: c => c.teachersId.some(t => t === this.props.teacherId)
     }))
+
+    this.state.tests.forEach(this.getAverageMark.bind(this))
 
     const schedule = []
     for (const cls of this.state.classes) {
@@ -54,46 +49,18 @@ export default class TeacherHome extends BaseHome {
     return <Timetable schedule={schedule} showTeacher={false} />
   }
 
-  tests (_, { tests, subjects }) {
-    console.log(tests)
-    return <table class={globalStyle.marks}>
-      <thead>
-        <td>Title</td>
-        <td>Subject</td>
-        <td>Coefficient</td>
-        <td>Average mark</td>
-        <td>Details</td>
-      </thead>
-      <tbody>
-        {tests.map(test => {
-          return <tr>
-            <td>{test.title}</td>
-            <td>{subjects.find(s => s.id === test.subjectId).name}</td>
-            <td>{test.coefficient}</td>
-            <td>{this.getAverageMark(test)}</td>
-            <td>
-              <Link class={style.coloredButton} href={`/tests/${test.id}`}>Details</Link>
-            </td>
-          </tr>
-        })}
-      </tbody>
-    </table>
+  tests (_, { tests }) {
+    return <TestList tests={tests} />
   }
 
   getAverageMark (test) {
-    if (this.state.marksCache[test.id]) {
-      const total = this.state.marksCache[test.id].reduce((sum, elt) => sum + elt.mark, 0)
-      const count = this.state.marksCache[test.id].length
-      return `${total / count}/${test.outOf}`
-    } else {
-      fetch(apiUrl('marks', { testId: test.id }))
-        .then(res => res.json())
-        .then(marks => {
-          const marksCache = this.state.marksCache
-          marksCache[test.id] = marks
-          this.setState({ marksCache })
-        })
-      return 'Loading'
-    }
+    store.query({ marks: m => m.testId === test.id }).then(res => {
+      const total = res.marks.reduce((sum, elt) => sum + elt.mark, 0)
+      const count = res.marks.length
+      test.averageMark = `${total / count}/${test.outOf}`
+      console.log(`${test.title}: ${test.averageMark}`)
+      this.forceUpdate()
+    })
+    test.averageMark = 'Loading...'
   }
 }

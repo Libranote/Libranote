@@ -1,0 +1,18 @@
+.table {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.table thead {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.table td {
+	padding: 10px;
+}
+
+.table tr:nth-child(2n) {
+	background: rgba(0, 0, 0, 0.05);
+}

@@ -63,9 +63,9 @@ const store = {
     for (const cb of this.readyCallbacks) {
       if (cb.type === type && cb.id === id) {
         cb.cb()
-        this.triggeredReady.push({ type, id })
       }
     }
+    this.triggeredReady.push({ type, id })
   }
 }
 

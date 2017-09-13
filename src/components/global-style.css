@@ -6,21 +6,18 @@
 	font-family: 'Open Sans';
 }
 
-.marks {
-	width: 100%;
-	text-align: center;
-	border-collapse: collapse;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.marks thead {
-	background: rgba(0, 0, 0, 0.2);
-}
-
-.marks td {
+.coloredButton {
+	border: none;
+	outline: none;
 	padding: 10px;
+	margin: auto 20px;
+	cursor: pointer;
+	transition: all 0.2s ease-in;
+	color: rgb(255, 0, 184);
+	background: transparent;
+	border-radius: 4px;
 }
 
-.marks tr:nth-child(2n) {
-	background: rgba(0, 0, 0, 0.05);
+.coloredButton:hover {
+	background: rgba(0, 0, 0, 0.2);
 }

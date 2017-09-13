@@ -1,7 +1,7 @@
 import BaseHome from './base'
 import Timetable from '../../components/timetable'
+import MarkList from '../marks/list'
 import store from '../../store'
-import globalStyle from '../../components/global-style'
 
 export default class StudentHome extends BaseHome {
   async componentWillMount () {
@@ -42,26 +42,7 @@ export default class StudentHome extends BaseHome {
     return <Timetable schedule={this.state.class.timetable} />
   }
 
-  marks (_, { subjects, tests, marks }) {
-    return <table class={globalStyle.marks}>
-      <thead>
-        <td>Subject</td>
-        <td>Mark</td>
-        <td>Coefficient</td>
-        <td>Comment</td>
-      </thead>
-      <tbody>
-        {marks.map(m => {
-          const test = tests.find(t => t.id === m.testId)
-
-          return <tr>
-            <td>{subjects.find(s => s.id === test.subjectId).name}</td>
-            <td>{m.mark}/{test.outOf}</td>
-            <td>{test.coefficient}</td>
-            <td>{m.comment}</td>
-          </tr>
-        })}
-      </tbody>
-    </table>
+  marks (_, { tests, marks }) {
+    return <MarkList marks={marks} tests={tests} for='student'/>
   }
 }
