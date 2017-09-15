@@ -1,7 +1,5 @@
-import { Link } from 'preact-router'
-
+import Button from '../../components/button'
 import Table from '../../components/table'
-import globalStyle from '../../components/global-style'
 import store from '../../store'
 
 export default class TestList extends Table {
@@ -24,7 +22,7 @@ export default class TestList extends Table {
       <td>{test.coefficient}</td>
       <td>{test.averageMark}</td>
       <td>
-        <Link class={globalStyle.coloredButton} href={`/tests/${test.id}`}>Details</Link>
+        <Button href={`/tests/${test.id}`}>Details</Button>
       </td>
     </tr>
   }

@@ -1,6 +1,7 @@
 import BaseHome from './base'
 import Timetable from '../../components/timetable'
 import TestList from '../tests/list'
+import Button from '../../components/button'
 import store from '../../store'
 
 export default class TeacherHome extends BaseHome {
@@ -50,15 +51,17 @@ export default class TeacherHome extends BaseHome {
   }
 
   tests (_, { tests }) {
-    return <TestList tests={tests} />
+    return <div>
+      <Button href='/tests/new'>New test</Button>
+      <TestList tests={tests} />
+    </div>
   }
 
   getAverageMark (test) {
     store.query({ marks: m => m.testId === test.id }).then(res => {
       const total = res.marks.reduce((sum, elt) => sum + elt.mark, 0)
       const count = res.marks.length
-      test.averageMark = `${total / count}/${test.outOf}`
-      console.log(`${test.title}: ${test.averageMark}`)
+      test.averageMark = res.marks.length ? `${total / count}/${test.outOf}` : 'No marks yet'
       this.forceUpdate()
     })
     test.averageMark = 'Loading...'

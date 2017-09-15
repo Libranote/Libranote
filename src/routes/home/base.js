@@ -1,7 +1,7 @@
 import { Component } from 'preact'
 import style from './style'
 import Expander from '../../components/expander'
-import globalStyle from '../../components/global-style'
+import Button from '../../components/button'
 
 export default class BaseHome extends Component {
   expanders = {}
@@ -19,8 +19,14 @@ export default class BaseHome extends Component {
   renderHome () {
     return <main>
       <h1>{this.state.heading}</h1>
+      <nav>
+        Go to
+        {this.sections.map(s =>
+          <Button href={`#${s.id}`}>{s.title}</Button>
+        )}
+      </nav>
       {this.sections.map(section =>
-        <div>
+        <div id={section.id}>
           <h2>{section.title} {this.toggleButton(section.id)}</h2>
           <Expander ref={this.expander(section.id)}>
             {section.content(this.props, this.state)}
@@ -35,9 +41,9 @@ export default class BaseHome extends Component {
   }
 
   toggleButton (expander) {
-    return <button class={globalStyle.coloredButton} onClick={this.toggle.bind(this, [ expander ])}>
+    return <Button onClick={this.toggle.bind(this, [ expander ])}>
       Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'less' : 'more'}
-    </button>
+    </Button>
   }
 
   toggle (what) {

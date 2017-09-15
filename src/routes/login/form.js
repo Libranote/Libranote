@@ -29,13 +29,16 @@ export default class LoginForm extends Component {
       <h1>Login to Libranote</h1>
       {children}
       <form onSubmit={this.tryLogin.bind(this)} class={style.form}>
-        <label for='type'>I'm a</label>
-        <select name='type' ref={this.ref.bind(this, 'type')}>
-          <option value='teacher'>Teacher</option>
-          <option value='student'>Student</option>
-        </select>
-        <label for='name'>Family name</label>
-        <input name='name' ref={this.ref.bind(this, 'name')}></input>
+        <label>I'm a
+          <select ref={this.ref.bind(this, 'type')}>
+            <option value='teacher'>Teacher</option>
+            <option value='student'>Student</option>
+          </select>
+        </label>
+
+        <label>Family name
+          <input ref={this.ref.bind(this, 'name')}></input>
+        </label>
         <button type='submit'>Login</button>
       </form>
     </main>

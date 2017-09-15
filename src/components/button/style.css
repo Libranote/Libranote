@@ -1,0 +1,21 @@
+.button {
+	border: none;
+	outline: none;
+	padding: 10px;
+	margin: 20px 20px;
+	cursor: pointer;
+	transition: all 0.2s ease-in;
+	color: rgb(255, 0, 184);
+	background: transparent;
+	border-radius: 4px;
+	text-decoration: none;
+}
+
+h1 .button, h2 .button, h3 .button {
+	font-weight: 400;
+	font-size: 0.75em;
+}
+
+.button:hover {
+	background: rgba(0, 0, 0, 0.2);
+}

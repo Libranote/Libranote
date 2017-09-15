@@ -7,7 +7,9 @@
       "classId": 0,
       "birthday": "2002-04-07",
       "group": 1,
-      "optionsId": [ 0 ]
+      "optionsId": [
+        0
+      ]
     },
     {
       "id": 1,
@@ -16,14 +18,19 @@
       "classId": 0,
       "birthday": "2002-02-12",
       "group": 2,
-      "optionsId": [ 0 ]
+      "optionsId": [
+        0
+      ]
     }
   ],
   "classes": [
     {
       "id": 0,
       "name": "Seconde A",
-      "teachersId": [ 0, 1 ],
+      "teachersId": [
+        0,
+        1
+      ],
       "timetable": [
         {
           "day": "Monday",
@@ -32,25 +39,37 @@
               "subjectId": 0,
               "teacherId": 1,
               "room": "Salle 17",
-              "hour": [ "7:50", "8:45" ]
+              "hour": [
+                "7:50",
+                "8:45"
+              ]
             },
             {
               "subjectId": 2,
               "teacherId": 0,
               "room": "Salle 108",
-              "hour": [ "8:50", "9:45" ]
+              "hour": [
+                "8:50",
+                "9:45"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "10:05", "12:00" ]
+              "hour": [
+                "10:05",
+                "12:00"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "13:50", "14:45" ]
+              "hour": [
+                "13:50",
+                "14:45"
+              ]
             }
           ]
         },
@@ -61,19 +80,28 @@
               "subjectId": 2,
               "teacherId": 0,
               "room": "Salle 108",
-              "hour": [ "7:50", "8:45" ]
+              "hour": [
+                "7:50",
+                "8:45"
+              ]
             },
             {
               "subjectId": 0,
               "teacherId": 1,
               "room": "Salle 17",
-              "hour": [ "8:50", "9:45" ]
+              "hour": [
+                "8:50",
+                "9:45"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "10:05", "12:00" ]
+              "hour": [
+                "10:05",
+                "12:00"
+              ]
             }
           ]
         },
@@ -84,19 +112,28 @@
               "subjectId": 0,
               "teacherId": 1,
               "room": "Salle 17",
-              "hour": [ "7:50", "8:45" ]
+              "hour": [
+                "7:50",
+                "8:45"
+              ]
             },
             {
               "subjectId": 2,
               "teacherId": 0,
               "room": "Salle 108",
-              "hour": [ "8:50", "9:45" ]
+              "hour": [
+                "8:50",
+                "9:45"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "10:05", "12:00" ]
+              "hour": [
+                "10:05",
+                "12:00"
+              ]
             }
           ]
         },
@@ -107,19 +144,28 @@
               "subjectId": 0,
               "teacherId": 1,
               "room": "Salle 17",
-              "hour": [ "7:50", "8:45" ]
+              "hour": [
+                "7:50",
+                "8:45"
+              ]
             },
             {
               "subjectId": 2,
               "teacherId": 0,
               "room": "Salle 108",
-              "hour": [ "8:50", "9:45" ]
+              "hour": [
+                "8:50",
+                "9:45"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "10:05", "12:00" ]
+              "hour": [
+                "10:05",
+                "12:00"
+              ]
             }
           ]
         },
@@ -130,19 +176,28 @@
               "subjectId": 0,
               "teacherId": 1,
               "room": "Salle 17",
-              "hour": [ "7:50", "8:45" ]
+              "hour": [
+                "7:50",
+                "8:45"
+              ]
             },
             {
               "subjectId": 2,
               "teacherId": 0,
               "room": "Salle 108",
-              "hour": [ "8:50", "9:45" ]
+              "hour": [
+                "8:50",
+                "9:45"
+              ]
             },
             {
               "subjectId": 1,
               "teacherId": 1,
               "room": "Salle 19",
-              "hour": [ "10:05", "12:00" ]
+              "hour": [
+                "10:05",
+                "12:00"
+              ]
             }
           ]
         }
@@ -174,13 +229,18 @@
       "id": 0,
       "name": "Dupont",
       "gender": "M.",
-      "subjectsId": [ 2 ]
+      "subjectsId": [
+        2
+      ]
     },
     {
       "id": 1,
       "name": "Dupré",
       "gender": "Mme.",
-      "subjectsId": [ 0, 1 ]
+      "subjectsId": [
+        0,
+        1
+      ]
     }
   ],
   "homeworks": [
@@ -208,6 +268,14 @@
       "subjectId": 2,
       "teacherId": 0,
       "outOf": 20
+    },
+    {
+      "title": "Flash test n°2",
+      "teacherId": 1,
+      "subjectId": 0,
+      "coefficient": 1,
+      "outOf": 20,
+      "id": 2
     }
   ],
   "marks": [
@@ -216,7 +284,9 @@
       "testId": 0,
       "mark": 7.5,
       "comment": "Good work",
-      "studentsId": [ 0 ],
+      "studentsId": [
+        0
+      ],
       "date": "2017-09-07 10:05"
     },
     {
@@ -224,7 +294,9 @@
       "testId": 1,
       "mark": 13.75,
       "comment": "Fait attention aux erreurs d'inattention",
-      "studentsId": [ 0 ],
+      "studentsId": [
+        0
+      ],
       "date": "2017-09-07 8:50"
     },
     {
@@ -232,9 +304,14 @@
       "testId": 1,
       "mark": 17.5,
       "comment": "Très bon travail",
-      "studentsId": [ 1 ],
+      "studentsId": [
+        1
+      ],
       "date": "2017-09-07 8:50"
     }
   ],
-  "connected": { "type": "student", "id": 0 }
+  "connected": {
+    "type": "student",
+    "id": 0
+  }
 }

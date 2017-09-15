@@ -5,19 +5,3 @@
 	width: 100%;
 	font-family: 'Open Sans';
 }
-
-.coloredButton {
-	border: none;
-	outline: none;
-	padding: 10px;
-	margin: auto 20px;
-	cursor: pointer;
-	transition: all 0.2s ease-in;
-	color: rgb(255, 0, 184);
-	background: transparent;
-	border-radius: 4px;
-}
-
-.coloredButton:hover {
-	background: rgba(0, 0, 0, 0.2);
-}
