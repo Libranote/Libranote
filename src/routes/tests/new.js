@@ -1,9 +1,9 @@
-import { Component } from 'preact'
+import Form from '../../components/form'
 import { route } from 'preact-router'
 import { apiUrl } from '../../utils'
 import store from '../../store'
 
-export default class NewTest extends Component {
+export default class NewTest extends Form {
   state = {
     title: '',
     subject: 0,
@@ -12,23 +12,30 @@ export default class NewTest extends Component {
   }
 
   async componentWillMount () {
+    super.componentWillMount()
     this.setState(await store.query({
       subjects: x => true,
       teachers: t => t.id === this.props.teacherId
     }))
 
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.setState({ ready: true, subject: this.state.teacher.subjectsId[0] })
-  }
+    this.setState({ subject: this.state.teacher.subjectsId[0] })
 
-  handleInputChange (event) {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+    this.title = 'New test'
+    this.submitMessage = 'Create'
 
-    this.setState({
-      [name]: value
-    })
+    this.addInput('Title', 'title', <input />)
+    this.addInput('Subject', 'subject', <select>
+      {this.state.teacher.subjectsId.map((subjectId, i) =>
+        <option value={subjectId}>
+          {this.state.subjects.find(s => s.id === subjectId).name}
+        </option>
+      )}
+    </select>)
+
+    this.addInput('Out of', 'outOf', <input type='number' min='0'/>)
+    this.addInput('Coefficient', 'coefficient', <input type='number' step='any' min='0'/>)
+
+    this.setState({ ready: true })
   }
 
   submit (evt) {
@@ -57,38 +64,5 @@ export default class NewTest extends Component {
       }
     })
     evt.preventDefault()
-  }
-
-  render (_, { teacher, subjects, ready }) {
-    return ready
-      ? <main>
-        <h1>New test</h1>
-        <form>
-          <label>Title
-            <input name='title' onChange={this.handleInputChange} value={this.state.title} />
-          </label>
-
-          <label>Subject
-            <select name='subject' value={this.state.subject} onChange={this.handleInputChange}>
-              {teacher.subjectsId.map((subjectId, i) =>
-                <option value={subjectId}>
-                  {subjects.find(s => s.id === subjectId).name}
-                </option>
-              )}
-            </select>
-          </label>
-
-          <label>Out of
-            <input name='outOf' onChange={this.handleInputChange} value={this.state.outOf} type='number'/>
-          </label>
-
-          <label>Coefficient
-            <input name='coefficient' onChange={this.handleInputChange} value={this.state.coefficient} type='number' />
-          </label>
-
-          <input type='submit' onClick={this.submit.bind(this)} value='Create' />
-        </form>
-      </main>
-      : <p>Loading...</p>
   }
 }

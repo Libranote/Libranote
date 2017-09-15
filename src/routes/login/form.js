@@ -1,46 +1,37 @@
-import { Component } from 'preact'
+import Form from '../../components/form'
 import { apiUrl } from '../../utils'
-import style from './style'
 
 // It's normal, that there is no password field, this is only to allow us to switch users quickly
-export default class LoginForm extends Component {
-  refs = {}
+export default class LoginForm extends Form {
+  state = {
+    type: 'teacher',
+    name: ''
+  }
 
-  tryLogin (evt) {
-    const table = this.refs.type.value
-    const name = this.refs.name.value
-    fetch(apiUrl(`${table}s`, { name }))
+  submit (evt) {
+    fetch(apiUrl(`${this.state.type}s`, { name: this.state.name }))
       .then(r => r.json())
       .then(res => {
         if (this.props.onLogin) {
-          this.props.onLogin({ id: res[0].id, type: table })
+          this.props.onLogin({ id: res[0].id, type: this.state.type })
         }
       })
 
     evt.preventDefault()
   }
 
-  ref (name, elt) {
-    this.refs[name] = elt
-  }
+  componentWillMount () {
+    super.componentWillMount()
+    this.title = 'Login to Libranote'
+    this.submitMessage = 'Login'
 
-  render ({ children }) {
-    return <main>
-      <h1>Login to Libranote</h1>
-      {children}
-      <form onSubmit={this.tryLogin.bind(this)} class={style.form}>
-        <label>I'm a
-          <select ref={this.ref.bind(this, 'type')}>
-            <option value='teacher'>Teacher</option>
-            <option value='student'>Student</option>
-          </select>
-        </label>
+    this.addInput('I\'m a', 'type',
+      <select>
+        <option value='teacher'>Teacher</option>
+        <option value='student'>Student</option>
+      </select>)
 
-        <label>Family name
-          <input ref={this.ref.bind(this, 'name')}></input>
-        </label>
-        <button type='submit'>Login</button>
-      </form>
-    </main>
+    this.addInput('Family name', 'name', <input />)
+    this.setState({ ready: true })
   }
 }

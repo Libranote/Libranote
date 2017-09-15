@@ -292,6 +292,14 @@
       "coefficient": 1,
       "outOf": 20,
       "id": 4
+    },
+    {
+      "title": "My test",
+      "teacherId": 1,
+      "subjectId": 1,
+      "coefficient": 1,
+      "outOf": 20,
+      "id": 5
     }
   ],
   "marks": [

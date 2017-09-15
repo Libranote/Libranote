@@ -5,9 +5,10 @@
 }
 
 .form label {
-  margin-bottom: 0px;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .form input, .form select {
-  margin-top: 10px;
+  display: block;
 }
