@@ -11,10 +11,10 @@ export default class Form extends Component {
   handleInputChange (event) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
 
+    this.inputs.find(i => i.id === target.name).input.attributes.value = value
     this.setState({
-      [name]: value
+      [target.name]: value
     })
   }
 
