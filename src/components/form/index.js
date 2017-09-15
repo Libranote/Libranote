@@ -29,7 +29,7 @@ export default class Form extends Component {
 
   render ({ children }, { ready }) {
     return ready
-      ? <main>
+      ? <main class={style.formPage}>
         <h1>{this.title}</h1>
         {children}
         <form class={style.form}>

@@ -300,6 +300,14 @@
       "coefficient": 1,
       "outOf": 20,
       "id": 5
+    },
+    {
+      "title": "Yo",
+      "teacherId": 0,
+      "subjectId": 2,
+      "coefficient": "14",
+      "outOf": "21",
+      "id": 6
     }
   ],
   "marks": [
