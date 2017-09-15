@@ -26,4 +26,8 @@ export default class TestList extends Table {
       </td>
     </tr>
   }
+
+  fallback () {
+    return <Button href='/tests/new'>Create your first test</Button>
+  }
 }

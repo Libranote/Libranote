@@ -9,14 +9,16 @@ export default class Table extends Component {
 
   render () {
     return this.state.ready && this.state.collection && this.state.columns
-      ? <table class={style.table}>
-        <thead>
-          {this.state.columns.map(c => <td>{c}</td>)}
-        </thead>
-        <tbody>
-          {this.state.collection.map(x => this.renderLine(x, this.state))}
-        </tbody>
-      </table>
+      ? this.state.collection.length === 0 && typeof this.fallback === 'function'
+        ? this.fallback()
+        : <table class={style.table}>
+          <thead>
+            {this.state.columns.map(c => <td>{c}</td>)}
+          </thead>
+          <tbody>
+            {this.state.collection.map(x => this.renderLine(x, this.state))}
+          </tbody>
+        </table>
       : <p>Loading...</p>
   }
 

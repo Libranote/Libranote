@@ -1,4 +1,5 @@
 import Table from '../../components/table'
+import Button from '../../components/button'
 import store from '../../store'
 
 export default class MarkList extends Table {
@@ -60,5 +61,18 @@ export default class MarkList extends Table {
       <td>{test.coefficient}</td>
       <td>{m.comment}</td>
     </tr>
+  }
+
+  fallback () {
+    return this.props.for === 'teacher'
+      ? <div>
+        <p>No one have been marked on this test yet.</p>
+        <Button onCLick={this.newMark}>Add the first mark</Button>
+      </div>
+      : <p>You don't have any mark</p>
+  }
+
+  newMark () {
+    throw new Error('Not implemented yet')
   }
 }
