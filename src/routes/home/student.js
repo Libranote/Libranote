@@ -39,7 +39,7 @@ export default class StudentHome extends BaseHome {
   }
 
   week () {
-    return <Timetable schedule={this.state.class.timetable} />
+    return <Timetable showTeacher={true} schedule={this.state.class.timetable} />
   }
 
   marks (_, { tests, marks }) {
