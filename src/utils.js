@@ -62,3 +62,12 @@ async function fetchTeacherData (id) {
   ])
   return { students, teachers, subjects, classes, tests }
 }
+
+export function getDisplayName (type, user) {
+  switch (type) {
+    case 'teacher':
+      return `${user.gender} ${user.name}`
+    default:
+      return `${user.firstname} ${user.name}`
+  }
+}

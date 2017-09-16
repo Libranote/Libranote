@@ -26,6 +26,7 @@ export default class App extends Component {
   loggedIn (user) {
     this.user = user
     fetchDataFor(this.user.type, this.user.id).then(res => {
+      this.user.data = res[`${this.user.type}s`][0]
       store.set(res)
       store.readyFor(this.user.type, this.user.id)
       this.forceUpdate()
@@ -46,7 +47,7 @@ export default class App extends Component {
     return <div id="app">
       <Sidebar routes={routes}/>
       <div>
-        <Header loggedInAs={this.user ? this.user.type : 'logged-out'} />
+        <Header user={this.user} />
         <Router onChange={this.handleRoute.bind(this)}>
           <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
             {this.loginMessage}

@@ -3,7 +3,6 @@ html, body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	background: #FAFAFA;
 	font-family: 'Montserrat', arial, sans-serif;
 	font-weight: 400;
 	color: #444;
@@ -26,10 +25,11 @@ html, body {
 }
 
 #app main {
-  padding: 100px 250px;
+  padding: 100px;
 	padding-bottom: 300px;
 	min-height: 100%;
 	width: 100%;
+	background: #FAFAFA;
 }
 
 .logo {

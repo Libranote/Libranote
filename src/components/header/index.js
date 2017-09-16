@@ -1,32 +1,28 @@
 import { Component } from 'preact'
-import { Link } from 'preact-router/match'
+import { getDisplayName } from '../../utils'
 import style from './style'
 
 export default class Header extends Component {
-  links = {
-    home: <Link activeClassName={style.active} href="/">Home</Link>,
-    logout: <Link activeClassName={style.active} href="/logout">Log Out</Link>,
-    login: <Link activeClassName={style.active} href="/login">Log In</Link>,
-    tests: <Link activeClassName={style.active} href="/tests">Tests</Link>
+  menuClick () {
+    this.setState({ showMenu: !this.state.showMenu })
   }
 
-  render ({ loggedInAs }) {
+  render ({ loggedInAs, user }, { showMenu }) {
     return <header class={style.header}>
-      <h1>Libranote</h1>
-      <nav>
-        {this.getLinksfor(loggedInAs)}
-      </nav>
+      <input placeholder='Search for tests, homeworks, or something else' />
+      <div class={style.user} onClick={this.menuClick.bind(this)}>
+        <div>
+          <h3>{getDisplayName(user.type, user.data)}</h3>
+          <p>Première S</p>
+        </div>
+        <img class={style.avatar} alt='' src='' />
+        {showMenu
+          ? <ul class={style.dropdown}>
+            <li>Log Out</li>
+            <li>Settings</li>
+          </ul>
+          : null}
+      </div>
     </header>
-  }
-
-  getLinksfor (role) {
-    switch (role) {
-      case 'student':
-        return [ this.links.home, this.links.logout ]
-      case 'teacher':
-        return [ this.links.home, this.links.tests, this.links.logout ]
-      default:
-        return [ this.links.login ]
-    }
   }
 }
