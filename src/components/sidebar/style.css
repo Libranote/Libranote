@@ -1,0 +1,31 @@
+.sidebar {
+  height: 100vh;
+  flex: 1;
+  display: block;
+  border-right: 1px solid rgba(76, 91, 92, 0.5);
+}
+
+.sidebar nav {
+  padding-top: 50px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 20px 40px;
+  text-decoration: none;
+  color: black;
+  transition: 0.1s all ease-in;
+}
+
+.sidebar nav a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar nav a.active {
+  border-left: 5px solid #4776e6;
+  color: #4776e6;
+}
+
+.sidebar header {
+  height: 100px;
+}

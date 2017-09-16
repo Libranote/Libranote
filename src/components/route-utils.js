@@ -6,12 +6,12 @@ import Test from '../routes/tests'
 export default function getRoutes (role, userId) {
   const routes = {
     home: {
-      student: <StudentHome path='/' studentId={userId}/>,
-      teacher: <TeacherHome path='/' teacherId={userId}/>
+      student: r('Home', '/', <StudentHome studentId={userId}/>),
+      teacher: r('Home', '/', <TeacherHome teacherId={userId}/>)
     },
     tests: {
-      new: <NewTest path='tests/new' teacherId={userId}/>,
-      view: <Test path='tests/:id' />
+      new: r('New Test', '/tests/new', <NewTest teacherId={userId}/>),
+      view: r('Test', '/tests/:id', <Test />, false)
     }
   }
 
@@ -22,5 +22,16 @@ export default function getRoutes (role, userId) {
       return [ routes.home.teacher, routes.tests.new, routes.tests.view ]
     default:
       return []
+  }
+}
+
+function r (title, url, component, display = true) {
+  component.attributes = component.attributes || {}
+  component.attributes.path = url
+  return {
+    title,
+    url,
+    component,
+    display
   }
 }

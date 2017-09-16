@@ -2,10 +2,10 @@ import { Component } from 'preact'
 import { Router, route } from 'preact-router'
 
 import { fetchDataFor } from '../utils.js'
+import Sidebar from './sidebar/index.js'
 import Header from './header'
 import getRoutes from './route-utils'
 import store from '../store'
-import style from './global-style'
 import LoginForm from '../routes/login/form'
 import Redirect from './redirect'
 
@@ -16,9 +16,7 @@ export default class App extends Component {
 
   handleRoute (e) {
     this.currentUrl = e.url
-    if (!this.user && this.currentUrl !== '/login') {
-      route('/login')
-    } else if (this.user && this.currentUrl === '/logout') {
+    if (this.user && this.currentUrl === '/logout') {
       this.user = null
       this.loginMessage = <p>Succesfully logged out</p>
       route('/login')
@@ -36,17 +34,35 @@ export default class App extends Component {
   }
 
   render () {
-    const routes = this.user ? getRoutes(this.user.type, this.user.id) : <Redirect path='/' to='/login' />
-    const res = <div id="app" class={style.app}>
-      <Header loggedInAs={this.user ? this.user.type : 'logged-out'} />
-      <Router onChange={this.handleRoute.bind(this)}>
-        <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
-          {this.loginMessage}
-        </LoginForm>
-        {routes}
-      </Router>
+    if (this.user) {
+      return this.renderLoggedIn()
+    } else {
+      return this.renderLoginPage()
+    }
+  }
+
+  renderLoggedIn () {
+    const routes = getRoutes(this.user.type, this.user.id)
+    return <div id="app">
+      <Sidebar routes={routes}/>
+      <div>
+        <Header loggedInAs={this.user ? this.user.type : 'logged-out'} />
+        <Router onChange={this.handleRoute.bind(this)}>
+          <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
+            {this.loginMessage}
+          </LoginForm>
+          {routes.map(r => r.component)}
+        </Router>
+      </div>
     </div>
-    this.loginMessage = null
-    return res
+  }
+
+  renderLoginPage () {
+    return <Router>
+      <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
+        {this.loginMessage}
+      </LoginForm>
+      <Redirect path='/' to='/login' />
+    </Router>
   }
 }
