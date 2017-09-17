@@ -20,7 +20,7 @@ export default class NewTest extends Form {
 
     this.setState({ subject: this.state.teacher.subjectsId[0] })
 
-    this.title = 'New test'
+    this.title = <h1>New test</h1>
     this.submitMessage = 'Create'
 
     this.addInput('Title', 'title', <input />)

@@ -13,11 +13,16 @@
 	margin: auto 40px;
 	outline: none;
 	border: none;
-	border-radius: 5px;
+	border-radius: 100px;
 	color: rgba(76, 91, 92, 0.5);
 	background: rgba(0, 0, 0, 0.05);
 	flex: 3;
 	padding: 15px;
+  transition: all 0.1s ease-in;
+}
+
+.header input:focus {
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .user {

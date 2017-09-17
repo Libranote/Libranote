@@ -1,5 +1,6 @@
 import Form from '../../components/form'
 import { apiUrl } from '../../utils'
+import style from './style'
 
 // It's normal, that there is no password field, this is only to allow us to switch users quickly
 export default class LoginForm extends Form {
@@ -21,8 +22,15 @@ export default class LoginForm extends Form {
   }
 
   componentWillMount () {
+    this.props.class = style.form
     super.componentWillMount()
-    this.title = 'Login to Libranote'
+    this.title = <div>
+      <header class={[ 'logo', style.head ].join(' ')}>
+        <span class='libra'>Libra</span>
+        <span class='note'>note</span>
+      </header>
+      <h1 style={{ textAlign: 'center', fontWeight: '300' }}>Login</h1>
+    </div>
     this.submitMessage = 'Login'
 
     this.addInput('I\'m a', 'type',

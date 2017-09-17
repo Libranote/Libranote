@@ -29,10 +29,10 @@ export default class Form extends Component {
 
   render ({ children }, { ready }) {
     return ready
-      ? <main class={style.formPage}>
-        <h1>{this.title}</h1>
+      ? <main class={[ style.form, this.props.class ].join(' ')}>
+        {this.title}
         {children}
-        <form class={style.form}>
+        <form>
           {this.inputs.map(i =>
             <div class={style.formItem}>
               <label for={i.id}>{i.label}</label>

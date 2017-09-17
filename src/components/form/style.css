@@ -1,15 +1,7 @@
-.formPage {
-  text-align: center;
-}
-
-.formPage h1 {
-  margin-bottom: 40px;
-}
-
 .form {
+  margin-bottom: 40px;
   display: block;
-  margin: 20px 0px;
-  width: 100%;
+  width: 30%;
 }
 
 .form label {
@@ -22,31 +14,34 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: 1px solid rgb(200, 200, 200);
-  border-radius: 2px;
-  padding: 10px;
+  padding: 15px;
   outline: none;
-  background: white;
+  color: rgba(76, 91, 92, 0.5);
+  background: rgba(0, 0, 0, 0.05);
   margin-bottom: 40px;
-  min-width: 30%;
-  transition: all 0.2s ease-in;
+  width: 100%;
+  transition: all 0.1s ease-in;
+  border-radius: 100px;
+  border: none;
 }
 
 .form select::after {
-  content: '\009660';
-  width: 10px;
-  height: 10px;
+  content: '\25BC';
   display: block;
 }
 
 .form input[type='submit'] {
-  background-color: rgb(32, 189, 62);
   cursor: pointer;
+  background: #8e54e9;
   color: white;
-  font-weight: bolder;
+  padding: 10px 20px;
+  margin: 10px 0px;
+}
+
+.form input[type='submit']:hover {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .form input:focus, .form select:focus {
-  box-shadow: 0px 0px 2px rgba(25, 133, 212, 0.73);
-  border-color: rgb(25, 133, 212);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
