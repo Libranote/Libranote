@@ -1,7 +1,7 @@
 import { Component } from 'preact'
 import style from './style'
 import Expander from '../../components/expander'
-import Button from '../../components/button'
+import Badge from '../../components/badge'
 
 export default class BaseHome extends Component {
   expanders = {}
@@ -18,16 +18,9 @@ export default class BaseHome extends Component {
 
   renderHome () {
     return <main>
-      <h1>{this.state.heading}</h1>
-      <nav>
-        Go to
-        {this.sections.map(s =>
-          <Button href={`#${s.id}`}>{s.title}</Button>
-        )}
-      </nav>
       {this.sections.map(section =>
         <div id={section.id}>
-          <h2>{section.title} {this.toggleButton(section.id)}</h2>
+          <h2 style={{ cursor: 'pointer' }} onClick={this.toggle.bind(this, [ section.id ])}>{section.title} {this.toggleButton(section.id)}</h2>
           <Expander ref={this.expander(section.id)}>
             {section.content(this.props, this.state)}
           </Expander>
@@ -41,9 +34,9 @@ export default class BaseHome extends Component {
   }
 
   toggleButton (expander) {
-    return <Button onClick={this.toggle.bind(this, [ expander ])}>
-      Show {this.expanders[expander] && this.expanders[expander].isVisible() ? 'less' : 'more'}
-    </Button>
+    return <Badge transparent color='blue'>
+      {this.expanders[expander] && this.expanders[expander].isVisible() ? '-' : '+'}
+    </Badge>
   }
 
   toggle (what) {

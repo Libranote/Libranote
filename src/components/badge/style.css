@@ -1,0 +1,30 @@
+.badge {
+  display: inline-block;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 1px;
+  height: 1.5em;
+  min-width: 1.5em;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  margin-left: 20px;
+}
+
+.red {
+  background: #ff715b;
+}
+
+.blue {
+  background: #4776e6;
+}
+
+.transparent {
+  opacity: 0.25;
+  transition: 0.1s all ease-in;
+}
+
+.transparent:hover {
+  opacity: 1;
+}

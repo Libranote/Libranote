@@ -22,7 +22,7 @@ export default class TestList extends Table {
       <td>{test.coefficient}</td>
       <td>{test.averageMark}</td>
       <td>
-        <Button href={`/tests/${test.id}`}>Details</Button>
+        <Button href={`/tests/${test.id}`} transparent noBg>Details</Button>
       </td>
     </tr>
   }

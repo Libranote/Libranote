@@ -25,11 +25,16 @@ html, body {
 }
 
 #app main {
-  padding: 100px;
+  padding: 50px 100px;
 	padding-bottom: 300px;
 	min-height: 100%;
 	width: 100%;
 	background: #FAFAFA;
+}
+
+#app main h2 {
+	margin-top: 100px;
+	font-weight: 400;
 }
 
 .logo {

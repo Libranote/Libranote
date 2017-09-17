@@ -27,6 +27,7 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
+	transition: 0.1s all ease-in;
 }
 
 .user:hover {
