@@ -53,6 +53,10 @@ export default class App extends Component {
             {this.loginMessage}
           </LoginForm>
           {routes.map(r => r.component)}
+          <main default>
+            <h1>Page not found</h1>
+            <p>Try to go back to the homepage</p>
+          </main>
         </Router>
       </div>
     </div>
@@ -63,7 +67,7 @@ export default class App extends Component {
       <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
         {this.loginMessage}
       </LoginForm>
-      <Redirect path='/' to='/login' />
+      <Redirect default to='/login' />
     </Router>
   }
 }
