@@ -10,13 +10,18 @@ export default class LoginForm extends Form {
   }
 
   submit (evt) {
-    fetch(apiUrl(`${this.state.type}s`, { name: this.state.name }))
-      .then(r => r.json())
-      .then(res => {
-        if (this.props.onLogin) {
-          this.props.onLogin({ id: res[0].id, type: this.state.type })
-        }
-      })
+    if (this.state.name !== '') {
+      fetch(apiUrl(`${this.state.type}s`, { name: this.state.name }))
+        .then(r => r.json())
+        .then(res => {
+          if (this.props.onLogin) {
+            this.props.onLogin({ id: res[0].id, type: this.state.type })
+          }
+        })
+    } else {
+      this.props.children.push(<p class='errorMessage'>Please enter your family name</p>)
+      this.forceUpdate()
+    }
 
     evt.preventDefault()
   }

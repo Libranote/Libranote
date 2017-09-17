@@ -60,3 +60,15 @@ html, body {
 	font-weight: 600;
 	margin-left: -0.05em;
 }
+
+.infoMessage {
+	background: rgba(71, 118, 230, 0.25);
+	color: #4776E6;
+	padding: 20px 10%;
+}
+
+.errorMessage {
+	background: rgba(255, 113, 91, 0.25);
+	color: #ff715b;
+	padding: 20px 10%;
+}

@@ -18,7 +18,8 @@ export default class App extends Component {
     this.currentUrl = e.url
     if (this.user && this.currentUrl === '/logout') {
       this.user = null
-      this.loginMessage = <p>Succesfully logged out</p>
+      this.loginMessage = <p class='infoMessage'>Succesfully logged out</p>
+      this.forceUpdate()
       route('/login')
     }
   }
