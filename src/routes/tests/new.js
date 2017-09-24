@@ -25,7 +25,7 @@ export default class NewTest extends Form {
 
     this.addInput('Title', 'title', <input />)
     this.addInput('Subject', 'subject', <select>
-      {this.state.teacher.subjectsId.map((subjectId, i) =>
+      {this.state.teacher.subjectsId.map(subjectId =>
         <option value={subjectId}>
           {this.state.subjects.find(s => s.id === subjectId).name}
         </option>

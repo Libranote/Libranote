@@ -1,6 +1,7 @@
 import Table from '../../components/table'
 import Button from '../../components/button'
 import store from '../../store'
+import { route } from 'preact-router'
 
 export default class MarkList extends Table {
   async componentWillMount () {
@@ -67,12 +68,12 @@ export default class MarkList extends Table {
     return this.props.for === 'teacher'
       ? <div>
         <p>No one have been marked on this test yet.</p>
-        <Button onCLick={this.newMark}>Add the first mark</Button>
+        <Button onCLick={this.newMark.bind(this)}>Add the first mark</Button>
       </div>
       : <p>You don't have any mark</p>
   }
 
   newMark () {
-    throw new Error('Not implemented yet')
+    route(`marks/new/${this.props.testId}`)
   }
 }

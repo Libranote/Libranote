@@ -39,7 +39,7 @@ export default class Form extends Component {
               {i.input}
             </div>
           )}
-          <input type='submit' value={this.submitMessage} onClick={this.submit.bind(this)} />
+          {this.submitButton || <input type='submit' value={this.submitMessage} onClick={this.submit.bind(this)} />}
         </form>
       </main>
       : <p>Loading...</p>
