@@ -1,5 +1,5 @@
-from libranote.api.school.models import School
-from libranote.api.school.serializers import SchoolSerializer
+from libranote.api.schools.models import School
+from libranote.api.schools.serializers import SchoolSerializer
 from rest_framework import status, generics
 
 class SchoolList(generics.ListCreateAPIView):

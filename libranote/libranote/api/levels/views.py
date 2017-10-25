@@ -1,5 +1,5 @@
-from libranote.api.level.models import Level
-from libranote.api.level.serializers import LevelSerializer
+from libranote.api.levels.models import Level
+from libranote.api.levels.serializers import LevelSerializer
 from rest_framework import status, generics
 
 class LevelList(generics.ListCreateAPIView):

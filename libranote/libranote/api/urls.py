@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from libranote.api.school import views as school_views
-from libranote.api.level import views as level_views
+from libranote.api.schools import views as school_views
+from libranote.api.levels import views as level_views
 
 urlpatterns = [
     url(r'^school/$', school_views.SchoolList.as_view()),
