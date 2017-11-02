@@ -1,7 +1,6 @@
 import { Component } from 'preact'
 import { Router, route } from 'preact-router'
 
-import { fetchDataFor } from '../utils.js'
 import Sidebar from './sidebar/index.js'
 import Header from './header'
 import getRoutes from './route-utils'
@@ -26,13 +25,10 @@ export default class App extends Component {
 
   loggedIn (user) {
     this.user = user
-    fetchDataFor(this.user.type, this.user.id).then(res => {
-      this.user.data = res[`${this.user.type}s`][0]
-      store.set(res)
-      store.readyFor(this.user.type, this.user.id)
-      this.forceUpdate()
-      route('/') // show the correct homepage
-    })
+    store.set({ user })
+    store.readyFor(this.user.role)
+    this.forceUpdate()
+    route('/') // show the correct homepage
   }
 
   render () {
@@ -44,7 +40,7 @@ export default class App extends Component {
   }
 
   renderLoggedIn () {
-    const routes = getRoutes(this.user.type, this.user.id)
+    const routes = getRoutes(this.user)
     return <div id="app">
       <Sidebar routes={routes}/>
       <div>

@@ -10,3 +10,9 @@ class Account(models.Model):
     birthday = models.DateField()
     avatar_url = models.ImageField()
     school = models.ForeignKey(School)
+
+    def get_role (self):
+        try:
+            return self.user.groups.first().name
+        except:
+            return ''

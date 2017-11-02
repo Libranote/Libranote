@@ -4,14 +4,14 @@ import NewTest from '../routes/tests/new'
 import Test from '../routes/tests'
 import NewMark from '../routes/marks/new'
 
-export default function getRoutes (role, userId) {
+export default function getRoutes (user) {
   const routes = {
     home: {
-      student: r('Home', '/', <StudentHome studentId={userId}/>),
-      teacher: r('Home', '/', <TeacherHome teacherId={userId}/>)
+      student: r('Home', '/', <StudentHome studentId={user.id}/>),
+      teacher: r('Home', '/', <TeacherHome teacherId={user.id}/>)
     },
     tests: {
-      new: r('New Test', '/tests/new', <NewTest teacherId={userId}/>),
+      new: r('New Test', '/tests/new', <NewTest teacherId={user.id}/>),
       view: r('Test', '/tests/:id', <Test />, false)
     },
     marks: {
@@ -19,10 +19,10 @@ export default function getRoutes (role, userId) {
     }
   }
 
-  switch (role) {
-    case 'student':
+  switch (user.role) {
+    case 'Student':
       return [ routes.home.student ]
-    case 'teacher':
+    case 'Teacher':
       return [ routes.home.teacher, routes.tests.new, routes.tests.view, routes.marks.new ]
     default:
       return []
