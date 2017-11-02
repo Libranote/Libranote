@@ -5,6 +5,7 @@ import Sidebar from './sidebar/index.js'
 import Header from './header'
 import getRoutes from './route-utils'
 import store from '../store'
+import { apiUrl, tokenHeader } from '../utils'
 import LoginForm from '../routes/login/form'
 import Redirect from './redirect'
 
@@ -17,25 +18,36 @@ export default class App extends Component {
     this.currentUrl = e.url
     if (this.user && this.currentUrl === '/logout') {
       this.user = null
+      window.localStorage.removeItem('token')
       this.loginMessage = <p class='infoMessage'>Succesfully logged out</p>
       this.forceUpdate()
       route('/login')
     }
   }
 
-  loggedIn (user) {
-    this.user = user
-    store.set({ user })
-    store.readyFor(this.user.role)
-    this.forceUpdate()
-    route('/') // show the correct homepage
+  loggedIn () {
+    fetch(apiUrl('account/me/'), tokenHeader())
+      .then(r => r.json())
+      .then(user => {
+        this.user = user
+        store.set({ user })
+        store.readyFor(this.user.role)
+        this.forceUpdate()
+        route('/') // show the correct homepage
+      }).catch(console.error)
   }
 
   render () {
     if (this.user) {
       return this.renderLoggedIn()
     } else {
-      return this.renderLoginPage()
+      const token = window.localStorage.getItem('token')
+      if (token) {
+        this.loggedIn()
+        return <div></div>
+      } else {
+        return this.renderLoginPage()
+      }
     }
   }
 

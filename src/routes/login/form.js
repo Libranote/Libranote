@@ -1,5 +1,5 @@
 import Form from '../../components/form'
-import { apiPost, apiUrl, tokenHeader } from '../../utils'
+import { apiPost } from '../../utils'
 import style from './style'
 
 // It's normal, that there is no password field, this is only to allow us to switch users quickly
@@ -16,11 +16,7 @@ export default class LoginForm extends Form {
           this.props.children.push(<p class='errorMessage'>{res.error}</p>)
         } else if (this.props.onLogin) {
           window.localStorage.setItem('token', res.token)
-          fetch(apiUrl('account/me/'), tokenHeader())
-            .then(r => r.json())
-            .then(user => {
-              this.props.onLogin(user)
-            }).catch(console.error)
+          this.props.onLogin(res.token)
         }
       })
     } else {
