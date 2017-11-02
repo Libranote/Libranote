@@ -1,20 +1,21 @@
 {
   "name": "libranote",
   "version": "1.0.0",
-  "description": "",
+  "description": "Libre software to manage school life",
   "main": "index.js",
   "scripts": {
-    "test": "eslint src && preact test",
-    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
-    "api": "node_modules/.bin/json-server --watch db.json"
+    "test": "npm run lint",
+    "build": "webpack --config webpack.config.js",
+    "lint": "eslint src"
   },
   "keywords": [],
   "author": "",
-  "license": "GPLv3.0",
+  "license": "GPL-3.0",
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
     "eslint": "^4.6.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
@@ -24,9 +25,11 @@
     "eslint-plugin-standard": "^3.0.1",
     "if-env": "^1.0.0",
     "json-server": "^0.12.0",
-    "preact-cli": "^1.4.1"
+    "preact-cli": "^1.4.1",
+    "webpack": "^3.8.1"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "preact-router": "^2.5.7"
