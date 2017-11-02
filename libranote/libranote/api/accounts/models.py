@@ -6,7 +6,7 @@ from libranote.api.schools.models import School
 # and Account data about the user/account
 class Account(models.Model):
     user = models.OneToOneField(User)
-    gender = models.CharField(blank=False, default='X')
+    gender = models.CharField(max_length=25, blank=False, default='X')
     birthday = models.DateField()
     avatar_url = models.ImageField()
     school = models.ForeignKey(School)

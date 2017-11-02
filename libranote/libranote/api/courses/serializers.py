@@ -5,9 +5,9 @@ from libranote.api.accounts.serializers import AccountSerializer
 
 class CourseSerializer(serializers.ModelSerializer):
     subject = serializers.SlugRelatedField(slug_field='name', read_only=True)
-    teacher = AccountSerializer(read_only=true)
-    klass = serializers.PrimaryKeyRelatedSerializer()
+    teacher = AccountSerializer(read_only=True)
+    klass = serializers.PrimaryKeyRelatedField(queryset=Class.objects.all())
 
     class Meta:
-        model = Account
+        model = Course
         fields = ('week', 'subject', 'teacher', 'klass', 'group', 'day', 'start', 'end')

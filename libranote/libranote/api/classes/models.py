@@ -3,7 +3,7 @@ from libranote.api.levels.models import Level
 from libranote.api.accounts.models import Account
 
 class Class(models.Model):
-    name = models.CharField(blank=True, default='')
+    name = models.CharField(max_length=10, blank=True, default='')
     main_teacher = models.ForeignKey(Account)
     level = models.ForeignKey(Level)
 
