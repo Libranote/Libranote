@@ -5,6 +5,6 @@ from libranote.api.subjects.models import Subject
 
 class Student(models.Model):
     account = models.ForeignKey(Account)
-    klass = models.ForeignKey(Class)
+    klass = models.ForeignKey(Class, related_name='students')
     group = models.IntegerField()
     options = models.ManyToManyField(Subject)

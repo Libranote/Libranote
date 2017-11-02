@@ -6,3 +6,6 @@ class Class(models.Model):
     name = models.CharField(blank=True, default='')
     main_teacher = models.ForeignKey(Account)
     level = models.ForeignKey(Level)
+
+    def get_display_name (self):
+        return self.level.title + " " + self.name
