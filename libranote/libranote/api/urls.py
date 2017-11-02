@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from rest_framework.authtoken import views as auth_views
 from libranote.api.accounts import views as account_views
 from libranote.api.classes import views as class_views
 from libranote.api.courses import views as course_views
@@ -11,6 +12,8 @@ from libranote.api.subjects import views as subject_views
 from libranote.api.tests import views as test_views
 
 urlpatterns = [
+    url(r'^token-auth/', auth_views.obtain_auth_token),
+
     url(r'^account/$', account_views.AccountList.as_view()),
     url(r'^account/(?P<pk>[0-9]+)/$', account_views.AccountDetail.as_view()),
 
