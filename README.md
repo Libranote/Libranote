@@ -12,28 +12,25 @@ If you want to contribute, you're welcome!
 To run it, just do:
 
 ```
+### Setup: just run it once ###
 npm i
 
-# Start the fake API server
-npm run api
-
-# In another terminal
-npm run dev
-```
-
-And go on [0.0.0.0:8080](http://0.0.0.0:8080).
-
-If you want to work on the server:
-
-```
+cd libranote
 pipenv --three
 pipenv shell
 pipenv install
+###
 
+# Run Webpack (run it in the root directory)
+npm run build
+
+# Start the server
 cd libranote
 python manage.py migrate
 python manage.py runserver
 ```
+
+And go on [0.0.0.0:8000](http://0.0.0.0:8000).
 
 You should probably use the Django Admin to add some test data,
 since it's not possible to initialize the app through the web client yet.
