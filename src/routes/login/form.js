@@ -1,9 +1,9 @@
+import { connect } from 'preact-redux'
 import Form from '../../components/form'
-import { apiPost } from '../../utils'
 import style from './style'
+import { loginRequest, addError } from '../../redux/login'
 
-// It's normal, that there is no password field, this is only to allow us to switch users quickly
-export default class LoginForm extends Form {
+class LoginForm extends Form {
   state = {
     password: '',
     username: ''
@@ -11,24 +11,23 @@ export default class LoginForm extends Form {
 
   submit (evt) {
     if (this.state.username !== '' && this.state.password !== '') {
-      apiPost('token-auth/', this.state).then(res => {
-        if (res.error) {
-          this.props.children.push(<p class='errorMessage'>{res.error}</p>)
-        } else if (this.props.onLogin) {
-          window.localStorage.setItem('token', res.token)
-          this.props.onLogin(res.token)
-        }
-      })
+      this.props.onLoginClick(this.state.username, this.state.password)
     } else {
-      this.props.children.push(<p class='errorMessage'>Please enter user name and password</p>)
-      this.forceUpdate()
+      this.props.invalidData()
     }
 
     evt.preventDefault()
   }
 
-  componentWillMount () {
+  componentWillUpdate () {
     this.props.class = style.form
+    this.props.children = [
+      this.props.error ? <p class='errorMessage'>{this.props.error}</p> : null,
+      this.props.info ? <p class='infoMessage'>{this.props.info}</p> : null
+    ]
+  }
+
+  componentWillMount () {
     super.componentWillMount()
     this.title = <div>
       <header class={[ 'logo', style.head ].join(' ')}>
@@ -44,3 +43,15 @@ export default class LoginForm extends Form {
     this.setState({ ready: true })
   }
 }
+
+const mapStateToProps = state => state.login
+
+const mapDispatchToProps = dispatch => ({
+  onLoginClick: (username, password) => dispatch(loginRequest(username, password)),
+  invalidData: () => dispatch(addError('Please provide your username and password.'))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm)
