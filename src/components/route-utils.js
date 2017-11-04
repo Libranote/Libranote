@@ -7,7 +7,7 @@ import NewMark from '../routes/marks/new'
 export default function getRoutes (user) {
   const routes = {
     home: {
-      student: r('Home', '/', <StudentHome studentId={user.id}/>),
+      student: r('Home', '/', <StudentHome studentId={user.id} />),
       teacher: r('Home', '/', <TeacherHome teacherId={user.id}/>)
     },
     tests: {

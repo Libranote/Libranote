@@ -1,3 +1,7 @@
+export function ready (data) {
+  return (!data.fetching && data.data && data.data.length > 0) || !!data.error
+}
+
 const API_URL = `/api/v1`
 
 export function apiUrl (endpoint) {

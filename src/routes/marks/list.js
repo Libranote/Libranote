@@ -1,6 +1,5 @@
 import Table from '../../components/table'
 import Button from '../../components/button'
-import store from '../../store'
 import { route } from 'preact-router'
 
 export default class MarkList extends Table {
@@ -15,18 +14,14 @@ export default class MarkList extends Table {
       students: this.props.students
     })
 
-    this.setState(await store.query({
-      subjects: x => true
-    }))
-
     this.setState({ ready: true })
   }
 
-  renderLine (m, state) {
+  renderLine (m, state, props) {
     if (this.props.for === 'teacher') {
-      return this.renderTeacher(m, state)
+      return this.renderTeacher(m, state, props)
     } else {
-      return this.renderStudent(m, state)
+      return this.renderStudent(m, state, props)
     }
   }
 
@@ -53,11 +48,11 @@ export default class MarkList extends Table {
     </tr>
   }
 
-  renderStudent (m, { tests, subjects }) {
-    const test = tests.find(t => t.id === m.testId)
+  renderStudent (m, _, { tests, subjects }) {
+    const test = tests.find(t => t.id === m.test)
 
     return <tr>
-      <td>{subjects.find(s => s.id === test.subjectId).name}</td>
+      <td>{subjects.find(s => s.id === test.subject).name}</td>
       <td>{m.mark}/{test.outOf}</td>
       <td>{test.coefficient}</td>
       <td>{m.comment}</td>

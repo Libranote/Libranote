@@ -7,8 +7,8 @@ export default class BaseHome extends Component {
   expanders = {}
   sections = []
 
-  addSection (title, id, content) {
-    this.sections.push({ title, id, content: content.bind(this) })
+  addSection (title, id, content, error) {
+    this.sections.push({ title, id, content: content.bind(this), error })
     this.forceUpdate()
   }
 
@@ -22,7 +22,9 @@ export default class BaseHome extends Component {
         <div id={section.id}>
           <h2 style={{ cursor: 'pointer' }} onClick={this.toggle.bind(this, [ section.id ])}>{section.title} {this.toggleButton(section.id)}</h2>
           <Expander ref={this.expander(section.id)}>
-            {section.content(this.props, this.state)}
+            {section.error
+              ? <p class='errorMessage'>{section.error}</p>
+              : section.content(this.props, this.state)}
           </Expander>
         </div>
       )}

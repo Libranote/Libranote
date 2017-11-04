@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "camelcase-keys": "^4.1.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "preact-redux": "^2.0.3",

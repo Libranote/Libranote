@@ -16,7 +16,7 @@ export default class Table extends Component {
             {this.state.columns.map(c => <td>{c}</td>)}
           </thead>
           <tbody>
-            {this.state.collection.map(x => this.renderLine(x, this.state))}
+            {this.state.collection.map(x => this.renderLine(x, this.state, this.props))}
           </tbody>
         </table>
       : <p>Loading...</p>
