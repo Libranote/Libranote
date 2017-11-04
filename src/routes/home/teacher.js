@@ -43,7 +43,7 @@ function getAverageMark (test, allMarks) {
   const marks = allMarks.filter(m => m.test === test.id)
   const total = marks.reduce((sum, elt) => sum + elt.mark, 0)
   const count = marks.length
-  test.averageMark = marks.length ? `${total / count}/${test.outOf}` : 'No marks yet'
+  return marks.length ? `${total / count}/${test.outOf}` : 'No marks yet'
 }
 
 function mapStateToProps (state) {
