@@ -18,6 +18,7 @@ export default class BaseHome extends Component {
 
   renderHome () {
     return <main>
+      <h1>{this.state.heading}</h1>
       {this.sections.map(section =>
         <div id={section.id}>
           <h2 style={{ cursor: 'pointer' }} onClick={this.toggle.bind(this, [ section.id ])}>{section.title} {this.toggleButton(section.id)}</h2>

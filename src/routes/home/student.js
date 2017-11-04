@@ -26,7 +26,7 @@ class StudentHome extends BaseHome {
   componentWillReceiveProps (props) {
     this.setState({
       ready: props.ready,
-      heading: `Welcome, ${props.student.first_name}`
+      heading: `Welcome, ${props.student.firstName}`
     })
     this.sections.find(s => s.id === 'marks').error = props.marksError
   }
