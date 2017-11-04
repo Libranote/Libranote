@@ -16,8 +16,10 @@ function fetchCourses () {
         }
         throw new Error(`Error while fetching courses: ${res.status} - ${res.statusText}`)
       }).then(res => {
-        res.class = res.klass
-        dispatch(fetchCoursesSuccess(res))
+        dispatch(fetchCoursesSuccess(res.map(c => {
+          c.class = c.klass
+          return c
+        })))
       }).catch(err => {
         dispatch(fetchCoursesError(err.message))
       })

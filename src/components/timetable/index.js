@@ -4,7 +4,6 @@ import { getDisplayName } from '../../utils'
 
 export default class Timetable extends Component {
   render ({ schedule, showTeacher }) {
-    console.log(schedule)
     return <table class={style.timetable}>
       <thead>
         {schedule.map(day =>
@@ -37,7 +36,7 @@ export default class Timetable extends Component {
                     <p>
                       {c.subject.name}
                       <br />
-                      {showTeacher ? getDisplayName(c.teacher) : c.class.name}
+                      {showTeacher ? getDisplayName(c.teacher) : c.class.displayName}
                     </p>
                   </div>
                 }

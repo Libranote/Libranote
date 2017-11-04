@@ -8,7 +8,6 @@ import logger from 'redux-logger'
 import reducers from './redux'
 
 const store = createStore(reducers, applyMiddleware(logger, thunk))
-console.log(store, applyMiddleware, thunk, reducers)
 
 window.h = h
 render(<Provider store={store}>

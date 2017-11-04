@@ -10,41 +10,7 @@ import { fetchSubjects } from '../../redux/subjects'
 import { fetchClasses } from '../../redux/classes'
 import { fetchAccounts } from '../../redux/account'
 import { fetchCourses } from '../../redux/courses'
-
-const emptyWeek = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-  'Friday', 'Saturday', 'Sunday'
-].map(d => ({
-  name: d,
-  courses: []
-}))
-
-function timetable (courses, student, week, subjects, classes) {
-  console.log('ttable')
-  const res = courses.reduce((days, course, i) => {
-    if ((course.group === null || course.group === student.group) &&
-        (course.week === week || course.week === '')) {
-      days.find(d => d.name === course.day).courses.push({
-        start: course.start,
-        end: course.end,
-        subject: {
-          name: (subjects.find(s => s.id === course.subject) || { name: course.subject }).name,
-          color: '#24ed00'
-        },
-        room: 'TODO',
-        teacher: course.teacher,
-        class: classes.find(c => c.id === course.class),
-        group: course.group
-      })
-    }
-
-    return days
-  }, emptyWeek)
-  console.log(res)
-  const res2 = res.filter(d => d.courses.length > 0 && d.name !== 'Saturday' & d.name !== 'Sunday')
-  console.log(res2)
-  return res2
-}
+import { timetable } from './utils'
 
 class StudentHome extends BaseHome {
   async componentWillMount () {
