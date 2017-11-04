@@ -86,8 +86,8 @@ async function fetchTeacherData (id) {
 export function getDisplayName (user) {
   switch (user.role) {
     case 'Teacher':
-      return `${user.gender} ${user.last_name}`
+      return `${user.gender} ${user.lastName}`
     default:
-      return `${user.first_name} ${user.last_name}`
+      return `${user.firstName} ${user.lastName}`
   }
 }

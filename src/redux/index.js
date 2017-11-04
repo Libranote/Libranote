@@ -5,6 +5,8 @@ import marks from './marks'
 import students from './students'
 import tests from './tests'
 import subjects from './subjects'
+import classes from './classes'
+import courses from './courses'
 
 export default combineReducers({
   login,
@@ -12,5 +14,7 @@ export default combineReducers({
   marks,
   students,
   tests,
-  subjects
+  subjects,
+  classes,
+  courses
 })

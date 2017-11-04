@@ -66,7 +66,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.accounts.find(x => x.username === state.login.connectedUser)
+    user: state.accounts.data.find(x => x.username === state.login.connectedUser)
   }
 }
 

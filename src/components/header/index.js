@@ -17,7 +17,7 @@ export default class Header extends Component {
             <h3>{getDisplayName(user)}</h3>
             <p>Première S</p>
           </div>
-          <img class={style.avatar} alt={getDisplayName(user)} src={user.avatar_url} />
+          <img class={style.avatar} alt={getDisplayName(user)} src={user.avatarUrl} />
         </div>
         {showMenu
           ? <ul class={style.dropdown}>

@@ -16,6 +16,7 @@ function fetchStudents () {
         }
         throw new Error(`Error while fetching students: ${res.status} - ${res.statusText}`)
       }).then(res => {
+        res.class = res.klass
         dispatch(fetchStudentsSuccess(res))
       }).catch(err => {
         dispatch(fetchStudentsError(err.message))

@@ -1,12 +1,14 @@
 import { Component } from 'preact'
 import style from './style'
+import { getDisplayName } from '../../utils'
 
 export default class Timetable extends Component {
   render ({ schedule, showTeacher }) {
+    console.log(schedule)
     return <table class={style.timetable}>
       <thead>
         {schedule.map(day =>
-          <td class={style.day}>{day.day}</td>
+          <td class={style.day}>{day.name}</td>
         )}
       </thead>
       <tbody>
@@ -28,14 +30,14 @@ export default class Timetable extends Component {
                     height: height
                   }}>
                     <p class={style.secondary}>
-                      {c.hour[0]} — {c.hour[1]}
+                      {c.start.substring(0, 5)} — {c.end.substring(0, 5)}
                       <br />
                       {c.room}
                     </p>
                     <p>
                       {c.subject.name}
                       <br />
-                      {showTeacher ? `${c.teacher.gender} ${c.teacher.name}` : c.class.name}
+                      {showTeacher ? getDisplayName(c.teacher) : c.class.name}
                     </p>
                   </div>
                 }
@@ -51,21 +53,22 @@ export default class Timetable extends Component {
     const res = []
     let lastEnd = begin
     for (const course of courses) {
-      res.push({ blank: true, hour: [ lastEnd, course.hour[0] ] })
+      // add a blank course before each course to fill the gap between this course and the previous
+      res.push({ blank: true, start: lastEnd, end: course.start })
       res.push(course)
-      lastEnd = course.hour[1]
+      lastEnd = course.end
     }
 
+    // add a blank course from the end of the last real course, to the end of the day
     if (this.toMinutes(lastEnd) < this.toMinutes(end)) {
-      res.push({ blank: true, hour: [ lastEnd, end ] })
+      res.push({ blank: true, start: lastEnd, end })
     }
 
     return res
   }
 
   getDuration (course) {
-    const hours = course.hour.map(h => this.toMinutes(h))
-    return hours[1] - hours[0]
+    return this.toMinutes(course.end) - this.toMinutes(course.start)
   }
 
   toMinutes (time) {
