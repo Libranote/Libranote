@@ -37,7 +37,10 @@ export default class BaseHome extends Component {
 
   toggleButton (expander) {
     return <Badge transparent color='blue'>
-      {this.expanders[expander] && this.expanders[expander].isVisible() ? '-' : '+'}
+      {this.expanders[expander]
+        ? this.expanders[expander].isVisible() ? '-' : '+'
+        : '-'
+      }
     </Badge>
   }
 
