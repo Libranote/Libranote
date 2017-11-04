@@ -24,6 +24,11 @@ class App extends Component {
   }
 
   render () {
+    console.log(this.props)
+    if (this.props.error) {
+      return <p>Error: {this.props.error}</p>
+    }
+
     if (this.props.user) {
       return this.renderLoggedIn()
     } else {
@@ -66,7 +71,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.accounts.data.find(x => x.username === state.login.connectedUser)
+    user: state.accounts.data.find(x => x.username === state.login.connectedUser),
+    error: state.accounts.error
   }
 }
 

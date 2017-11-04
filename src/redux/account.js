@@ -33,7 +33,7 @@ const fetchMe = () => dispatch => {
     .then(res => res.json())
     .then(res => {
       dispatch(addAccount(res))
-    })
+    }).catch(err => dispatch(fetchAccountsError(err.message)))
 }
 
 const reducer = handleActions({

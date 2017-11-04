@@ -1,29 +1,28 @@
-import { Component } from 'preact'
-import store from '../../store'
+import { connect } from 'preact-redux'
 import MarkList from '../marks/list'
 import Button from '../../components/button'
 
-export default class Test extends Component {
-  async componentWillMount () {
-    const id = Number.parseInt(this.props.id)
-    this.setState(await store.query({
-      tests: t => t.id === id,
-      marks: m => m.testId === id,
-      students: x => true,
-      classes: x => true
-    }))
-    this.setState({ ready: true })
-  }
+const Test = ({ id, tests, marks, students, classes }) => {
+  const testId = Number.parseInt(id)
+  const test = tests.find(t => t.id === testId)
+  return test
+    ? <main>
+      <h1>{test.title}</h1>
+      <p>Coefficient : {test.coefficient}</p>
+      <h2>Results</h2>
+      <MarkList for='teacher' marks={marks} tests={[ test ]} students={students} classes={classes} testId={testId}/>
+      <Button href={`/marks/new/${test.id}`}>Add a mark</Button>
+    </main>
+    : <p>Loading…</p>
+}
 
-  render (_, { ready, test, marks, students, classes }) {
-    return ready
-      ? <main>
-        <h1>{test.title}</h1>
-        <p>Coefficient : {test.coefficient}</p>
-        <h2>Results</h2>
-        <MarkList for='teacher' marks={marks} tests={[ test ]} students={students} classes={classes} testId={this.props.id}/>
-        <Button href={`/marks/new/${test.id}`}>Add a mark</Button>
-      </main>
-      : <p>Loading...</p>
+const matchStateToProps = state => {
+  return {
+    tests: state.tests.data,
+    marks: state.marks.data,
+    students: state.students.data,
+    classes: state.classes.data
   }
 }
+
+export default connect(matchStateToProps)(Test)

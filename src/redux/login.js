@@ -25,9 +25,7 @@ function loginRequest (username, password) {
         dispatch(loginSuccess(res.token, username))
         dispatch(fetchMe())
       }).catch(err => {
-        console.log('error')
-        console.log(err)
-        dispatch(loginFailed(err))
+        dispatch(loginFailed(err.message))
       })
   }
 }
@@ -55,7 +53,7 @@ const reducer = handleActions({
 
   [loginFailed]: (state, { payload: { error } }) => ({
     ...state,
-    error: error.message,
+    error: error,
     info: null
   }),
 

@@ -26,18 +26,16 @@ export default class MarkList extends Table {
   }
 
   renderTeacher (m, { classes, students, tests }) {
-    const test = tests[0]
+    const test = tests.find(t => t.id === m.test)
 
-    const studs = m.studentsId.map(s => students.find(student => student.id === s))
-    const cls = studs.filter((s, i) => studs.findIndex(stud => stud.class === s.class) === i)
-      .map(s => classes.find(c => c.id === s.classId))
-
+    const stud = students.find(s => s.id === m.student)
+    const cls = classes.find(c => c.id === stud.class)
     return <tr>
       <td>
-        {studs.map(s => `${s.firstname} ${s.name}`).join(', ')}
+        {`${stud.firstName} ${stud.lastName}`}
       </td>
       <td>
-        {cls.map(c => c.name).join(', ')}
+        {cls.name}
       </td>
       <td>
         {m.mark}/{test.outOf}
