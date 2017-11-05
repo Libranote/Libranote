@@ -9,6 +9,7 @@ import LoginForm from '../routes/login/form'
 import Redirect from './redirect'
 import { logout, loginSuccess } from '../redux/login'
 import { fetchMe } from '../redux/account'
+import { setQueryIds } from '../redux/app'
 
 class App extends Component {
   componentWillMount () {
@@ -17,14 +18,15 @@ class App extends Component {
 
   handleRoute (e) {
     if (this.props.user && e.url === '/logout') {
-      this.props.dispatch(logout())
+      this.props.logout()
     } else if (this.props.user && e.url === '/login') {
       route('/')
     }
+
+    this.props.setQueryIds(e.url.replace(/\/$/, '').split('/').reverse().map(Number.parseInt).filter(x => !Number.isNaN(x)))
   }
 
   render () {
-    console.log(this.props)
     if (this.props.error) {
       return <p>Error: {this.props.error}</p>
     }
@@ -35,8 +37,7 @@ class App extends Component {
       const token = window.localStorage.getItem('token')
       const user = window.localStorage.getItem('username')
       if (token && user) {
-        this.props.dispatch(loginSuccess(token, user))
-        this.props.dispatch(fetchMe())
+        this.props.loginSuccess(token, user)
       } else {
         return this.renderLoginPage()
       }
@@ -76,6 +77,16 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  setQueryIds: ids => dispatch(setQueryIds(ids)),
+  logout: () => dispatch(logout()),
+  loginSuccess: (token, user) => {
+    dispatch(loginSuccess(token, user))
+    dispatch(fetchMe())
+  }
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App)

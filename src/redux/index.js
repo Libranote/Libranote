@@ -7,8 +7,10 @@ import tests from './tests'
 import subjects from './subjects'
 import classes from './classes'
 import courses from './courses'
+import app from './app'
 
 export default combineReducers({
+  app,
   login,
   accounts,
   marks,
