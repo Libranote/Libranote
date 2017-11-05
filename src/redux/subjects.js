@@ -33,7 +33,7 @@ const reducer = handleActions({
     ...state,
     fetching: false,
     data: [
-      ...state.data,
+      ...state.data.filter(c => !subjects.some(x => x.id === c.id)),
       ...subjects.map(x => camel(x, { deep: true }))
     ]
   }),

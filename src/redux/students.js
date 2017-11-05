@@ -34,7 +34,7 @@ const reducer = handleActions({
     ...state,
     fetching: false,
     data: [
-      ...state.data,
+      ...state.data.filter(c => !students.some(x => x.id === c.id)),
       ...students.map(x => camel(x, { deep: true }))
     ]
   }),

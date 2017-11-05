@@ -61,7 +61,7 @@ const reducer = handleActions({
     ...state,
     fetching: false,
     data: [
-      ...state.data,
+      ...state.data.filter(c => !marks.some(x => x.id === c.id)),
       ...marks.map(m => camel(m, { deep: true }))
     ]
   }),
