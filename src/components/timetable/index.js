@@ -4,17 +4,19 @@ import { getDisplayName } from '../../utils'
 
 export default class Timetable extends Component {
   render ({ schedule, showTeacher }) {
-    return <table class={style.timetable}>
-      <thead>
+    return <div class={style.timetable}>
+      <header>
         {schedule.map(day =>
-          <td class={style.day}>{day.name}</td>
+          <div class={style.day}>{day.name}</div>
         )}
-      </thead>
-      <tbody>
-        <tr>
-          {schedule.map(day =>
-            <td class={style.day}>
-              {this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' }).map(c => {
+      </header>
+      <main>
+        {schedule.map(day => {
+          const courses = this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' })
+
+          return <div class={[style.day, courses.length > 0 ? '' : style.empty].join(' ')}>
+            {courses.length > 0
+              ? courses.map(c => {
                 const duration = this.getDuration(c)
                 const height = `${duration / 7.5}em`
 
@@ -40,12 +42,13 @@ export default class Timetable extends Component {
                     </p>
                   </div>
                 }
-              })}
-            </td>
-          )}
-        </tr>
-      </tbody>
-    </table>
+              })
+              : <p>You can stay at home!</p>
+            }
+          </div>
+        })}
+      </main>
+    </div>
   }
 
   fillBlanks (courses, { begin, end }) {
@@ -56,11 +59,6 @@ export default class Timetable extends Component {
       res.push({ blank: true, start: lastEnd, end: course.start })
       res.push(course)
       lastEnd = course.end
-    }
-
-    // add a blank course from the end of the last real course, to the end of the day
-    if (this.toMinutes(lastEnd) < this.toMinutes(end)) {
-      res.push({ blank: true, start: lastEnd, end })
     }
 
     return res

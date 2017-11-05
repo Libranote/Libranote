@@ -6,6 +6,9 @@ const emptyWeek = [
   courses: []
 }))
 
+// Remove week-end if there is no courses
+const removeWeekEndIfPossible = d => d.courses.length > 0 || (d.name !== 'Saturday' && d.name !== 'Sunday')
+
 export function timetable (courses, student, week, subjects, classes) {
   return courses.reduce((days, course, i) => {
     if ((course.group === null || course.group === student.group) &&
@@ -25,7 +28,7 @@ export function timetable (courses, student, week, subjects, classes) {
     }
 
     return days
-  }, emptyWeek).filter(d => d.courses.length > 0 && d.name !== 'Saturday' & d.name !== 'Sunday')
+  }, emptyWeek).filter(removeWeekEndIfPossible)
 }
 
 export function teacherTimetable (courses, teacher, week, subjects, classes) {
@@ -46,5 +49,5 @@ export function teacherTimetable (courses, teacher, week, subjects, classes) {
     }
 
     return days
-  }, emptyWeek).filter(d => d.courses.length > 0 && d.name !== 'Saturday' & d.name !== 'Sunday')
+  }, emptyWeek).filter(removeWeekEndIfPossible)
 }
