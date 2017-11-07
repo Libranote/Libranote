@@ -1,58 +1,57 @@
 import { Component } from 'preact'
 import { Router, route } from 'preact-router'
+import { connect } from 'preact-redux'
 
-import { fetchDataFor } from '../utils.js'
 import Sidebar from './sidebar/index.js'
 import Header from './header'
 import getRoutes from './route-utils'
-import store from '../store'
 import LoginForm from '../routes/login/form'
 import Redirect from './redirect'
+import { logout, loginSuccess } from '../redux/login'
+import { fetchMe } from '../redux/account'
+import { setQueryIds } from '../redux/app'
 
-export default class App extends Component {
+class App extends Component {
   componentWillMount () {
     document.title = 'Libranote'
   }
 
   handleRoute (e) {
-    this.currentUrl = e.url
-    if (this.user && this.currentUrl === '/logout') {
-      this.user = null
-      this.loginMessage = <p class='infoMessage'>Succesfully logged out</p>
-      this.forceUpdate()
-      route('/login')
+    if (this.props.user && e.url === '/logout') {
+      this.props.logout()
+    } else if (this.props.user && e.url === '/login') {
+      route('/')
     }
-  }
 
-  loggedIn (user) {
-    this.user = user
-    fetchDataFor(this.user.type, this.user.id).then(res => {
-      this.user.data = res[`${this.user.type}s`][0]
-      store.set(res)
-      store.readyFor(this.user.type, this.user.id)
-      this.forceUpdate()
-      route('/') // show the correct homepage
-    })
+    this.props.setQueryIds(e.url.replace(/\/$/, '').split('/').reverse().map(Number.parseInt).filter(x => !Number.isNaN(x)))
   }
 
   render () {
-    if (this.user) {
+    if (this.props.error) {
+      return <p>Error: {this.props.error}</p>
+    }
+
+    if (this.props.user) {
       return this.renderLoggedIn()
     } else {
-      return this.renderLoginPage()
+      const token = window.localStorage.getItem('token')
+      const user = window.localStorage.getItem('username')
+      if (token && user) {
+        this.props.loginSuccess(token, user)
+      } else {
+        return this.renderLoginPage()
+      }
     }
   }
 
   renderLoggedIn () {
-    const routes = getRoutes(this.user.type, this.user.id)
+    const routes = getRoutes(this.props.user)
     return <div id="app">
       <Sidebar routes={routes}/>
       <div>
-        <Header user={this.user} />
+        <Header user={this.props.user} />
         <Router onChange={this.handleRoute.bind(this)}>
-          <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
-            {this.loginMessage}
-          </LoginForm>
+          <LoginForm path='/login' />
           {routes.map(r => r.component)}
           <main default>
             <h1>Page not found</h1>
@@ -64,11 +63,30 @@ export default class App extends Component {
   }
 
   renderLoginPage () {
-    return <Router>
-      <LoginForm path='/login' onLogin={this.loggedIn.bind(this)}>
-        {this.loginMessage}
-      </LoginForm>
+    return <Router onChange={this.handleRoute.bind(this)}>
+      <LoginForm path='/login' />
       <Redirect default to='/login' />
     </Router>
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.accounts.data.find(x => x.username === state.login.connectedUser),
+    error: state.accounts.error
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  setQueryIds: ids => dispatch(setQueryIds(ids)),
+  logout: () => dispatch(logout()),
+  loginSuccess: (token, user) => {
+    dispatch(loginSuccess(token, user))
+    dispatch(fetchMe())
+  }
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

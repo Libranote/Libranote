@@ -1,13 +1,8 @@
 import Button from '../../components/button'
 import Table from '../../components/table'
-import store from '../../store'
 
 export default class TestList extends Table {
   async componentWillMount () {
-    this.setState(await store.query({
-      subjects: x => true
-    }))
-
     this.setState({
       collection: this.props.tests,
       columns: [ 'Title', 'Subject', 'Coefficient', 'Average mark', 'Details' ],
@@ -15,10 +10,10 @@ export default class TestList extends Table {
     })
   }
 
-  renderLine (test, { subjects }) {
+  renderLine (test, _, { subjects }) {
     return <tr>
       <td>{test.title}</td>
-      <td>{subjects.find(s => s.id === test.subjectId).name}</td>
+      <td>{subjects.find(s => s.id === test.subject).name}</td>
       <td>{test.coefficient}</td>
       <td>{test.averageMark}</td>
       <td>

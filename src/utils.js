@@ -1,18 +1,38 @@
-const API_URL = 'http://0.0.0.0:3000'
+export function ready (data) {
+  return (!data.fetching && data.data && data.data.length > 0) || !!data.error
+}
 
-export function apiUrl (table, query) {
-  const url = new URL(API_URL)
-  url.pathname = table
-  if (query) {
-    url.search = encodeURI(Object.keys(query).map(elt => `${elt}=${query[elt]}`).join('&'))
-  }
-  return url.href
+const API_URL = `/api/v1`
+
+export function apiUrl (endpoint) {
+  return `${API_URL}/${endpoint}`
+}
+
+export async function apiPost (endpoint, data) {
+  const res = await fetch(apiUrl(endpoint), {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
+  return res.json()
 }
 
 export async function fetchAll (urls) {
   const results = await Promise.all(urls.map(u => fetch(u)))
   const toJson = results.map(res => res.json())
   return Promise.all(toJson)
+}
+
+export function tokenHeader () {
+  const token = window.localStorage.getItem('token')
+  return {
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  }
 }
 
 export function flatten (arrays) {
@@ -63,11 +83,11 @@ async function fetchTeacherData (id) {
   return { students, teachers, subjects, classes, tests }
 }
 
-export function getDisplayName (type, user) {
-  switch (type) {
-    case 'teacher':
-      return `${user.gender} ${user.name}`
+export function getDisplayName (user) {
+  switch (user.role) {
+    case 'Teacher':
+      return `${user.gender} ${user.lastName}`
     default:
-      return `${user.firstname} ${user.name}`
+      return `${user.firstName} ${user.lastName}`
   }
 }

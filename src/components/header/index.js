@@ -14,10 +14,10 @@ export default class Header extends Component {
       <div class={style.menu} onClick={this.menuClick.bind(this)}>
         <div class={style.user}>
           <div class={style.info}>
-            <h3>{getDisplayName(user.type, user.data)}</h3>
+            <h3>{getDisplayName(user)}</h3>
             <p>Première S</p>
           </div>
-          <img class={style.avatar} alt='' src='' />
+          <img class={style.avatar} alt={getDisplayName(user)} src={user.avatarUrl} />
         </div>
         {showMenu
           ? <ul class={style.dropdown}>

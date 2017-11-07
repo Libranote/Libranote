@@ -1,33 +1,33 @@
+import { connect } from 'preact-redux'
 import Form from '../../components/form'
-import { apiUrl } from '../../utils'
 import style from './style'
+import { loginRequest, addError } from '../../redux/login'
 
-// It's normal, that there is no password field, this is only to allow us to switch users quickly
-export default class LoginForm extends Form {
+class LoginForm extends Form {
   state = {
-    type: 'teacher',
-    name: ''
+    password: '',
+    username: ''
   }
 
   submit (evt) {
-    if (this.state.name !== '') {
-      fetch(apiUrl(`${this.state.type}s`, { name: this.state.name }))
-        .then(r => r.json())
-        .then(res => {
-          if (this.props.onLogin) {
-            this.props.onLogin({ id: res[0].id, type: this.state.type })
-          }
-        })
+    if (this.state.username !== '' && this.state.password !== '') {
+      this.props.onLoginClick(this.state.username, this.state.password)
     } else {
-      this.props.children.push(<p class='errorMessage'>Please enter your family name</p>)
-      this.forceUpdate()
+      this.props.invalidData()
     }
 
     evt.preventDefault()
   }
 
-  componentWillMount () {
+  componentWillUpdate () {
     this.props.class = style.form
+    this.props.children = [
+      this.props.error ? <p class='errorMessage'>{this.props.error}</p> : null,
+      this.props.info ? <p class='infoMessage'>{this.props.info}</p> : null
+    ]
+  }
+
+  componentWillMount () {
     super.componentWillMount()
     this.title = <div>
       <header class={[ 'logo', style.head ].join(' ')}>
@@ -38,13 +38,20 @@ export default class LoginForm extends Form {
     </div>
     this.submitMessage = 'Login'
 
-    this.addInput('I\'m a', 'type',
-      <select>
-        <option value='teacher'>Teacher</option>
-        <option value='student'>Student</option>
-      </select>)
-
-    this.addInput('Family name', 'name', <input />)
+    this.addInput('User name', 'username', <input />)
+    this.addInput('Password', 'password', <input type='password' />)
     this.setState({ ready: true })
   }
 }
+
+const mapStateToProps = state => state.login
+
+const mapDispatchToProps = dispatch => ({
+  onLoginClick: (username, password) => dispatch(loginRequest(username, password)),
+  invalidData: () => dispatch(addError('Please provide your username and password.'))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm)

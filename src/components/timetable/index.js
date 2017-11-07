@@ -1,19 +1,22 @@
 import { Component } from 'preact'
 import style from './style'
+import { getDisplayName } from '../../utils'
 
 export default class Timetable extends Component {
   render ({ schedule, showTeacher }) {
-    return <table class={style.timetable}>
-      <thead>
+    return <div class={style.timetable}>
+      <header>
         {schedule.map(day =>
-          <td class={style.day}>{day.day}</td>
+          <div class={style.day}>{day.name}</div>
         )}
-      </thead>
-      <tbody>
-        <tr>
-          {schedule.map(day =>
-            <td class={style.day}>
-              {this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' }).map(c => {
+      </header>
+      <main>
+        {schedule.map(day => {
+          const courses = this.fillBlanks(day.courses, { begin: '7:50', end: '18:05' })
+
+          return <div class={[style.day, courses.length > 0 ? '' : style.empty].join(' ')}>
+            {courses.length > 0
+              ? courses.map(c => {
                 const duration = this.getDuration(c)
                 const height = `${duration / 7.5}em`
 
@@ -28,44 +31,41 @@ export default class Timetable extends Component {
                     height: height
                   }}>
                     <p class={style.secondary}>
-                      {c.hour[0]} — {c.hour[1]}
+                      {c.start.substring(0, 5)} — {c.end.substring(0, 5)}
                       <br />
                       {c.room}
                     </p>
                     <p>
                       {c.subject.name}
                       <br />
-                      {showTeacher ? `${c.teacher.gender} ${c.teacher.name}` : c.class.name}
+                      {showTeacher ? getDisplayName(c.teacher) : c.class.displayName}
                     </p>
                   </div>
                 }
-              })}
-            </td>
-          )}
-        </tr>
-      </tbody>
-    </table>
+              })
+              : <p>You can stay at home!</p>
+            }
+          </div>
+        })}
+      </main>
+    </div>
   }
 
   fillBlanks (courses, { begin, end }) {
     const res = []
     let lastEnd = begin
     for (const course of courses) {
-      res.push({ blank: true, hour: [ lastEnd, course.hour[0] ] })
+      // add a blank course before each course to fill the gap between this course and the previous
+      res.push({ blank: true, start: lastEnd, end: course.start })
       res.push(course)
-      lastEnd = course.hour[1]
-    }
-
-    if (this.toMinutes(lastEnd) < this.toMinutes(end)) {
-      res.push({ blank: true, hour: [ lastEnd, end ] })
+      lastEnd = course.end
     }
 
     return res
   }
 
   getDuration (course) {
-    const hours = course.hour.map(h => this.toMinutes(h))
-    return hours[1] - hours[0]
+    return this.toMinutes(course.end) - this.toMinutes(course.start)
   }
 
   toMinutes (time) {

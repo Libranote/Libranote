@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Libranote</title>
+    <link rel="shortcut icon" href="{% static '/assets/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static '/assets/apple-touch-icon.png' %}" />
+    <meta name="application-name" content="Libranote"/>
+    <meta name="msapplication-square70x70logo" content="{% static '/assets/ms/small.png' %}"/>
+    <meta name="msapplication-square150x150logo" content="{% static '/assets/ms/medium.png' %}"/>
+    <meta name="msapplication-wide310x150logo" content="{% static '/assets/ms/wide.png' %}"/>
+    <meta name="msapplication-square310x310logo" content="{% static '/assets/ms/large.png' %}"/>
+    <meta name="msapplication-TileColor" content="#8E54E9"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+  </head>
+  <body>
+    <noscript>
+      <h1>Please enable JavaScript</h1>
+    </noscript>
+    <script defer src="{% static 'main.js' %}"></script>
+  </body>
+</html>

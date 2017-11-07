@@ -1,9 +1,9 @@
 import Form from '../../components/form'
 import { route } from 'preact-router'
-import { apiUrl } from '../../utils'
-import store from '../../store'
+import { connect } from 'preact-redux'
+import { saveTest } from '../../redux/tests'
 
-export default class NewTest extends Form {
+class NewTest extends Form {
   state = {
     title: '',
     subject: 0,
@@ -13,21 +13,19 @@ export default class NewTest extends Form {
 
   async componentWillMount () {
     super.componentWillMount()
-    this.setState(await store.query({
-      subjects: x => true,
-      teachers: t => t.id === this.props.teacherId
-    }))
 
-    this.setState({ subject: this.state.teacher.subjectsId[0] })
+    this.setState({
+      subject: this.props.subjects.find(s => s.teachers.includes(this.props.teacher.id))
+    })
 
     this.title = <h1>New test</h1>
     this.submitMessage = 'Create'
 
     this.addInput('Title', 'title', <input />)
     this.addInput('Subject', 'subject', <select>
-      {this.state.teacher.subjectsId.map(subjectId =>
-        <option value={subjectId}>
-          {this.state.subjects.find(s => s.id === subjectId).name}
+      {this.props.subjects.filter(s => s.teachers.includes(this.props.teacher.id)).map(s =>
+        <option value={s.id}>
+          {s.name}
         </option>
       )}
     </select>)
@@ -38,31 +36,42 @@ export default class NewTest extends Form {
     this.setState({ ready: true })
   }
 
+  componentWillReceiveProps (props) {
+    if (props.lastSavedId && this.state.saving) {
+      route(`/tests/${props.lastSavedId}`)
+      this.setState({
+        saving: false
+      })
+    }
+  }
+
   submit (evt) {
     const newTest = {
       title: this.state.title,
-      teacherId: this.props.teacherId,
-      subjectId: Number.parseInt(this.state.subject),
+      subject: Number.parseInt(this.state.subject),
       coefficient: this.state.coefficient,
-      outOf: this.state.outOf
+      'out_of': this.state.outOf
     }
 
-    fetch(apiUrl('tests'), {
-      method: 'POST',
-      body: JSON.stringify(newTest),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      if (res.ok) {
-        res.json().then(json => {
-          store.query({ tests: x => true }).then(data => {
-            store.set({ tests: data.tests.concat([ json ]) })
-            route(`/tests/${json.id}`)
-          })
-        })
-      }
+    this.props.saveTest(newTest)
+    this.setState({
+      saving: true
     })
+
     evt.preventDefault()
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    subjects: state.subjects.data,
+    teacher: state.accounts.data.find(t => t.username === state.login.connectedUser),
+    lastSavedId: state.tests.lastSavedId
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  saveTest: test => dispatch(saveTest(test))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTest)

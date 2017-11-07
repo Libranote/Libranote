@@ -1,21 +1,44 @@
 .timetable {
   width: 100%;
-  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
 }
 
-.timetable thead {
+.timetable header {
+  flex: 1;
   text-align: center;
+  display: flex;
+  margin-bottom: -1px;
+}
+
+.timetable header > * {
+  flex: 1;
+}
+
+.timetable main {
+  padding: 0px !important;
+  flex: 1;
+  display: flex;
 }
 
 .day {
+  flex: 1;
   margin: 0px;
   padding: 20px 0px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-right: -1px;
 }
 
 .day h3 {
   padding: 10px;
   margin-top: 0px;
+}
+
+.day.empty {
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .course {

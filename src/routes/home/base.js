@@ -7,8 +7,8 @@ export default class BaseHome extends Component {
   expanders = {}
   sections = []
 
-  addSection (title, id, content) {
-    this.sections.push({ title, id, content: content.bind(this) })
+  addSection (title, id, content, error) {
+    this.sections.push({ title, id, content: content.bind(this), error })
     this.forceUpdate()
   }
 
@@ -18,11 +18,14 @@ export default class BaseHome extends Component {
 
   renderHome () {
     return <main>
+      <h1>{this.state.heading}</h1>
       {this.sections.map(section =>
         <div id={section.id}>
           <h2 style={{ cursor: 'pointer' }} onClick={this.toggle.bind(this, [ section.id ])}>{section.title} {this.toggleButton(section.id)}</h2>
           <Expander ref={this.expander(section.id)}>
-            {section.content(this.props, this.state)}
+            {section.error
+              ? <p class='errorMessage'>{section.error}</p>
+              : section.content(this.props, this.state)}
           </Expander>
         </div>
       )}
@@ -35,7 +38,10 @@ export default class BaseHome extends Component {
 
   toggleButton (expander) {
     return <Badge transparent color='blue'>
-      {this.expanders[expander] && this.expanders[expander].isVisible() ? '-' : '+'}
+      {this.expanders[expander]
+        ? this.expanders[expander].isVisible() ? '-' : '+'
+        : '-'
+      }
     </Badge>
   }
 
