@@ -10,7 +10,7 @@ const Test = ({ id, tests, marks, students, classes }) => {
       <h1>{test.title}</h1>
       <p>Coefficient : {test.coefficient}</p>
       <h2>Results</h2>
-      <MarkList for='teacher' marks={marks} tests={[ test ]} students={students} classes={classes} testId={testId}/>
+      <MarkList for='teacher' marks={marks.filter(m => m.test === testId)} tests={[ test ]} students={students} classes={classes} testId={testId}/>
       <Button href={`/marks/new/${test.id}`}>Add a mark</Button>
     </main>
     : <p>Loading…</p>
