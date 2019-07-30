@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   viewBox="0 0 1024 1024"
+   id="svg5655"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="libranote-logo.svg"
+   inkscape:export-filename="/home/baptiste/libranote-logo.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs5657">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4172"
+       id="linearGradient4178"
+       x1="6.8715186"
+       y1="-15.36906"
+       x2="404.98102"
+       y2="182.62083"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.5272687,0,0,4.4997004,-3.0697674,151.34349)" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4172">
+      <stop
+         style="stop-color:#4776e6;stop-opacity:1"
+         offset="0"
+         id="stop4174" />
+      <stop
+         style="stop-color:#8e54e9;stop-opacity:1"
+         offset="1"
+         id="stop4176" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="-51.238674"
+     inkscape:cy="735.1097"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4154"
+     showgrid="false"
+     units="px"
+     inkscape:object-nodes="true"
+     inkscape:snap-page="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-object-midpoints="false"
+     inkscape:snap-center="false"
+     inkscape:snap-text-baseline="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5660">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-28.362161)">
+    <rect
+       style="opacity:1;fill:url(#linearGradient4178);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.23529412"
+       id="rect4170"
+       width="1024"
+       height="1023.9999"
+       x="0"
+       y="28.362162" />
+    <g
+       id="g4154"
+       transform="translate(426.52298,692.51498)">
+      <text
+         sodipodi:linespacing="1000%"
+         id="text4210"
+         y="44.722122"
+         x="-250.05423"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:562.5px;line-height:1000%;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Light';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         xml:space="preserve"><tspan
+           y="44.722122"
+           x="-250.05423"
+           id="tspan4212"
+           sodipodi:role="line">L</tspan></text>
+      <text
+         sodipodi:linespacing="1000%"
+         id="text4150"
+         y="44.722122"
+         x="27.25827"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:562.5px;line-height:1000%;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:562.5px;line-height:1000%;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Normal';text-align:start;writing-mode:lr;text-anchor:start;fill:#ffffff;fill-opacity:1;"
+           y="44.722122"
+           x="27.25827"
+           id="tspan4152"
+           sodipodi:role="line">n</tspan></text>
+    </g>
+  </g>
+</svg>
